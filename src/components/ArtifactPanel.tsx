@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import StatusBadge from "@/components/StatusBadge";
 import EvidencePanel from "@/components/EvidencePanel";
 
@@ -8,6 +9,9 @@ interface ArtifactPanelProps {
   visualHint?: string;
   status?: "Verified" | "Needs verification";
   sources?: string[];
+  visual?: ReactNode;
+  compact?: boolean;
+  showSources?: boolean;
 }
 
 export default function ArtifactPanel({
@@ -16,17 +20,29 @@ export default function ArtifactPanel({
   description,
   status,
   sources,
+  visual,
+  compact = false,
+  showSources = false,
 }: ArtifactPanelProps) {
   return (
     <article
-      className="p-6"
+      className="p-5"
       style={{
         backgroundColor: "var(--color-bg-raised)",
         border: "1px solid var(--color-border)",
         borderLeft: "3px solid var(--color-accent-dim)",
       }}
     >
-      {/* Object label header */}
+      {visual && (
+        <div
+          className="mb-4"
+          style={{ border: "1px solid var(--color-border)" }}
+          aria-hidden="true"
+        >
+          {visual}
+        </div>
+      )}
+
       <header className="mb-4">
         <div className="flex flex-wrap items-start justify-between gap-2 mb-1">
           <h4
@@ -47,15 +63,14 @@ export default function ArtifactPanel({
         )}
       </header>
 
-      {/* Description */}
       <p
-        className="text-sm leading-relaxed mb-4 line-clamp-4"
+        className={`text-sm leading-relaxed mb-3 ${compact ? "line-clamp-3" : "line-clamp-4"}`}
         style={{ color: "var(--color-text-secondary)" }}
       >
         {description}
       </p>
 
-      <EvidencePanel sources={sources ?? []} />
+      {showSources && <EvidencePanel sources={sources ?? []} />}
     </article>
   );
 }

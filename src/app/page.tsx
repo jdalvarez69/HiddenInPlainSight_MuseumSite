@@ -1,123 +1,105 @@
 import Link from "next/link";
-import { siteMeta, exhibits, artifacts } from "@/lib/museum-data";
+import { siteMeta, exhibits } from "@/lib/museum-data";
 import ExhibitCard from "@/components/ExhibitCard";
-import ArtifactPanel from "@/components/ArtifactPanel";
-import CuratorNote from "@/components/CuratorNote";
 import ExhibitVisual from "@/components/visuals/ExhibitVisual";
 
-const exhibitVisualKeyMap = {
-  "secret-writing": "scytale",
-  "states-and-power": "frequency",
-  "machines-of-secrecy": "enigma",
-  "mathematical-turn": "public-private-key",
-  "invisible-shield": "tls",
-} as const;
+const hooksBySlug: Record<string, string> = {
+  "secret-writing": "Before mathematics, secrecy depended on who held the key.",
+  "states-and-power": "Language patterns turned codebreaking into statecraft.",
+  "machines-of-secrecy": "Machine complexity created machine-scale vulnerabilities.",
+  "mathematical-turn": "Proof replaced obscurity as the standard for security.",
+  "invisible-shield": "Encryption became invisible infrastructure for daily life.",
+};
 
-// Three artifacts chosen to represent the arc of the story:
-// ancient/manual, machine-era, modern/digital
-const featuredArtifacts = [
-  artifacts.find((a) => a.title === "Scytale"),
-  artifacts.find((a) => a.title === "Enigma Rotor System Diagram"),
-  artifacts.find((a) => a.title === "TLS Handshake Sequence"),
-].filter(Boolean) as typeof artifacts;
+const motifBySlug: Record<string, string> = {
+  "secret-writing": "A->D",
+  "states-and-power": "E/T/A",
+  "machines-of-secrecy": "R-III",
+  "mathematical-turn": "N=p*q",
+  "invisible-shield": "TLS",
+};
+
+const thesisLine =
+  "Cryptography began as the art of hiding messages and became the science of protecting trust.";
 
 export default function Home() {
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="museum-container pt-24 pb-20 md:pt-36 md:pb-28">
-        <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(300px,380px)] md:items-start">
+      <section className="museum-container pt-24 pb-18 md:pt-32 md:pb-24">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(320px,430px)] lg:items-start">
           <div className="max-w-2xl">
             <p
               className="text-[0.6rem] tracking-widest uppercase mb-5"
               style={{ color: "var(--color-accent)" }}
             >
-              A Guided Digital Exhibit
+              Museum Entrance
             </p>
 
             <h1
-              className="mb-4"
+              className="mb-3"
               style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
             >
               {siteMeta.title}
             </h1>
 
             <p
-              className="text-base tracking-wider uppercase mb-7"
+              className="text-[0.72rem] tracking-[0.18em] uppercase mb-6"
               style={{ color: "var(--color-text-dim)" }}
             >
               {siteMeta.subtitle}
             </p>
 
             <p
-              className="text-lg leading-relaxed mb-10"
-              style={{ color: "var(--color-text-secondary)", maxWidth: "62ch" }}
+              className="text-lg leading-relaxed max-w-[58ch]"
+              style={{ color: "var(--color-text-secondary)" }}
             >
-              {siteMeta.thesis}
+              {thesisLine}
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3 mt-10">
               <Link
-                href="/exhibits"
-                className="inline-block px-8 py-3 text-[0.7rem] tracking-widest uppercase transition-colors border border-[#c4973a] text-[#c4973a] hover:bg-[#c4973a] hover:text-[#1a1714]"
+                href="/exhibits/secret-writing"
+                className="inline-block px-7 py-3 text-[0.68rem] tracking-widest uppercase transition-colors"
+                style={{
+                  border: "1px solid var(--color-accent)",
+                  color: "var(--color-accent)",
+                }}
               >
-                Enter the Museum
+                Begin the Tour
               </Link>
               <Link
                 href="/process"
-                className="inline-block px-8 py-3 text-[0.7rem] tracking-widest uppercase transition-colors border border-[#2e2b26] text-[#9b9388] hover:border-[#9b9388] hover:text-[#f0ead8]"
+                className="inline-block px-7 py-3 text-[0.68rem] tracking-widest uppercase transition-colors"
+                style={{
+                  border: "1px solid var(--color-border)",
+                  color: "var(--color-text-secondary)",
+                }}
               >
-                About This Project
+                View the Process
               </Link>
             </div>
           </div>
 
-          <div className="w-full md:pt-2" aria-label="Museum entrance visual">
+          <div aria-label="Entrance visual">
             <ExhibitVisual
               visualKey="caesar"
-              title="Entrance Diagram"
-              caption="A substitution wheel from the earliest room: secrecy by controlled letter shift."
+              title="Entrance Motif"
+              caption="A simple shift that opened a 4,000-year story about trust."
             />
           </div>
         </div>
       </section>
 
-      {/* ── Rule ─────────────────────────────────────────────────────────── */}
-      <div
-        className="museum-container"
-        style={{ borderTop: "1px solid var(--color-rule)" }}
-      />
+      <div className="museum-container" style={{ borderTop: "1px solid var(--color-rule)" }} />
 
-      {/* ── Curator Note ─────────────────────────────────────────────────── */}
-      <section className="museum-container py-12 max-w-2xl">
-        <CuratorNote>
-          <p>
-            This museum follows cryptography from ancient concealment to the
-            mathematics behind modern digital trust. Five rooms. One
-            continuous story.
-          </p>
-          <p className="mt-3">
-            Historical claims are source-traced. Anything pending confirmation
-            is marked. Nothing here is invented.
-          </p>
-        </CuratorNote>
-      </section>
-
-      {/* ── Guided Route Preview ─────────────────────────────────────────── */}
-      <section className="museum-container py-12">
-        <header className="mb-8">
+      <section className="museum-container py-12 md:py-16">
+        <header className="mb-7">
           <p
-            className="text-[0.6rem] tracking-widest uppercase mb-2"
+            className="text-[0.6rem] tracking-widest uppercase"
             style={{ color: "var(--color-text-dim)" }}
           >
-            The Exhibit Route
+            Guided Route
           </p>
-          <h2
-            className="text-2xl"
-            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
-          >
-            Five Rooms. One Story.
-          </h2>
         </header>
 
         <div className="grid gap-px sm:grid-cols-2 lg:grid-cols-3">
@@ -127,118 +109,14 @@ export default function Home() {
               order={exhibit.order}
               title={exhibit.title}
               subtitle={exhibit.subtitle}
-              intro={exhibit.intro}
-              visual={
-                <ExhibitVisual
-                  visualKey={
-                    exhibitVisualKeyMap[
-                      exhibit.slug as keyof typeof exhibitVisualKeyMap
-                    ] ?? "scytale"
-                  }
-                />
-              }
-              showIntro={false}
               href={`/exhibits/${exhibit.slug}`}
+              hook={hooksBySlug[exhibit.slug]}
+              motif={motifBySlug[exhibit.slug]}
+              compact
             />
           ))}
-        </div>
-      </section>
-
-      {/* ── Rule ─────────────────────────────────────────────────────────── */}
-      <div
-        className="museum-container my-4"
-        style={{ borderTop: "1px solid var(--color-rule)" }}
-      />
-
-      {/* ── Artifact Preview ─────────────────────────────────────────────── */}
-      <section className="museum-container py-12">
-        <header className="mb-8">
-          <p
-            className="text-[0.6rem] tracking-widest uppercase mb-2"
-            style={{ color: "var(--color-text-dim)" }}
-          >
-            From the Collection
-          </p>
-          <h2
-            className="text-2xl"
-            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
-          >
-            Selected Objects
-          </h2>
-          <p
-            className="mt-2 text-sm"
-            style={{ color: "var(--color-text-secondary)", maxWidth: "56ch" }}
-          >
-            Each object marks a turning point in how people protected or broke
-            secrets.
-          </p>
-        </header>
-
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredArtifacts.map((artifact) => (
-            <ArtifactPanel
-              key={artifact.title}
-              title={artifact.title}
-              era={artifact.era}
-              description={artifact.description}
-              status={artifact.status}
-              sources={artifact.sources}
-            />
-          ))}
-        </div>
-
-        <div className="mt-6">
-          <Link
-            href="/artifacts"
-            className="text-[0.65rem] tracking-widest uppercase transition-colors"
-            style={{ color: "var(--color-text-dim)" }}
-          >
-            View all artifacts &rarr;
-          </Link>
-        </div>
-      </section>
-
-      {/* ── Rule ─────────────────────────────────────────────────────────── */}
-      <div
-        className="museum-container my-4"
-        style={{ borderTop: "1px solid var(--color-rule)" }}
-      />
-
-      {/* ── Closing Invitation ───────────────────────────────────────────── */}
-      <section className="museum-container py-20 md:py-28">
-        <div className="max-w-xl">
-          <p
-            className="text-[0.6rem] tracking-widest uppercase mb-4"
-            style={{ color: "var(--color-text-dim)" }}
-          >
-            Begin Here
-          </p>
-          <h2
-            className="text-3xl mb-6 leading-snug"
-            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
-          >
-            The story starts in antiquity.<br />It is still being written.
-          </h2>
-          <p
-            className="text-base leading-relaxed mb-10"
-            style={{ color: "var(--color-text-secondary)", maxWidth: "52ch" }}
-          >
-            Follow the route from early secret writing to the encryption behind
-            secure connections today.
-          </p>
-          <Link
-            href="/exhibits"
-            className="inline-block px-10 py-3 text-[0.7rem] tracking-widest uppercase transition-colors"
-            style={{
-              border: "1px solid var(--color-accent)",
-              color: "var(--color-accent)",
-            }}
-          >
-            Begin the Exhibit Route
-          </Link>
         </div>
       </section>
     </>
   );
 }
-
