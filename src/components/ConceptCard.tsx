@@ -45,7 +45,7 @@ export default function ConceptCard({
             </span>
           )}
           <h4
-            className="text-base leading-snug"
+            className="text-lg leading-snug"
             style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
           >
             {term}
@@ -55,14 +55,14 @@ export default function ConceptCard({
       </div>
 
       <p
-        className="text-[0.67rem] tracking-wide uppercase mb-2"
+        className="text-[0.74rem] tracking-wide uppercase mb-2"
         style={{ color: "var(--color-accent)" }}
       >
         {shortDefinition}
       </p>
 
       <p
-        className={`text-sm leading-relaxed ${compact ? "line-clamp-3" : "line-clamp-5"}`}
+        className={`text-base leading-relaxed ${compact ? "line-clamp-3" : "line-clamp-5"}`}
         style={{ color: "var(--color-text-secondary)" }}
       >
         {plainLanguageExplanation}

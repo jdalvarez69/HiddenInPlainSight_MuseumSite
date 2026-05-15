@@ -35,6 +35,9 @@ interface ExhibitVisualProps {
   visualKey?: VisualKey;
   title?: string;
   caption?: string;
+  imagePath?: string;
+  imageAlt?: string;
+  imageMinHeight?: number;
 }
 
 // Default visual per exhibit slug
@@ -71,12 +74,79 @@ function renderVisual(key: VisualKey) {
   }
 }
 
+function resolveLocalAssetPath(path: string) {
+  if (!path.startsWith("/")) return path;
+  const basePath = process.env.GITHUB_PAGES === "true" ? "/HiddenInPlainSight_MuseumSite" : "";
+  return `${basePath}${path}`;
+}
+
 export default function ExhibitVisual({
   slug,
   visualKey,
   title,
   caption,
+  imagePath,
+  imageAlt,
+  imageMinHeight = 220,
 }: ExhibitVisualProps) {
+  if (imagePath) {
+    const resolvedImagePath = resolveLocalAssetPath(imagePath);
+
+    return (
+      <figure
+        className="w-full overflow-hidden"
+        style={{
+          backgroundColor: "var(--color-bg-raised)",
+          border: "1px solid var(--color-border)",
+          borderTop: "2px solid var(--color-accent-dim)",
+        }}
+      >
+        {title && (
+          <div className="px-5 pt-4 pb-1">
+            <p
+              className="text-[0.62rem] tracking-widest uppercase"
+              style={{ color: "var(--color-text-dim)" }}
+            >
+              {title}
+            </p>
+          </div>
+        )}
+
+        <div
+          className="relative"
+          style={{
+            minHeight: `${imageMinHeight}px`,
+            borderTop: title ? "1px solid var(--color-rule)" : undefined,
+            borderBottom: caption ? "1px solid var(--color-rule)" : undefined,
+          }}
+        >
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `linear-gradient(rgba(26, 23, 20, 0.16), rgba(26, 23, 20, 0.16)), url(${resolvedImagePath})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+            role="img"
+            aria-label={imageAlt ?? title ?? "Curated exhibit image"}
+          />
+        </div>
+
+        {caption && (
+          <figcaption
+            className="px-5 py-3 text-[0.78rem] leading-relaxed italic"
+            style={{
+              color: "var(--color-text-secondary)",
+            }}
+          >
+            {caption}
+          </figcaption>
+        )}
+      </figure>
+    );
+  }
+
   // Resolve which visual to show
   const resolvedKey: VisualKey | null =
     visualKey ?? (slug ? slugVisualMap[slug] ?? null : null);

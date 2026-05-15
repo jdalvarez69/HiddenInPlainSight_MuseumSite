@@ -25,7 +25,9 @@ type VisualKey =
 
 const orderBySlug = Object.fromEntries(exhibits.map((exhibit) => [exhibit.slug, exhibit.order]));
 
-function visualForArtifact(title: string, exhibitSlug: string): VisualKey {
+const artifactsHeroImage = "/images/companions/artifacts-hero.png";
+
+function visualForArtifact(title: string): VisualKey | null {
   const normalized = title.toLowerCase();
 
   if (normalized.includes("scytale")) return "scytale";
@@ -39,18 +41,19 @@ function visualForArtifact(title: string, exhibitSlug: string): VisualKey {
   if (normalized.includes("public") || normalized.includes("private") || normalized.includes("rsa")) {
     return "public-private-key";
   }
-  if (normalized.includes("tls") || normalized.includes("handshake") || normalized.includes("https") || normalized.includes("lock")) {
+  if (
+    normalized.includes("tls") ||
+    normalized.includes("handshake") ||
+    normalized.includes("https") ||
+    normalized.includes("lock")
+  ) {
     return "tls";
   }
   if (normalized.includes("end-to-end") || normalized.includes("e2e") || normalized.includes("pgp")) {
     return "e2e";
   }
 
-  if (exhibitSlug === "secret-writing") return "scytale";
-  if (exhibitSlug === "states-and-power") return "frequency";
-  if (exhibitSlug === "machines-of-secrecy") return "enigma";
-  if (exhibitSlug === "mathematical-turn") return "public-private-key";
-  return "post-quantum";
+  return null;
 }
 
 function shortDescription(text: string) {
@@ -69,30 +72,41 @@ export default function ArtifactsPage() {
 
   return (
     <>
-      <section className="museum-container pt-20 pb-12 md:pt-28 md:pb-14">
-        <div className="max-w-2xl">
-          <p className="text-[0.6rem] tracking-widest uppercase mb-5" style={{ color: "var(--color-accent)" }}>
-            Companion Gallery
-          </p>
-          <h1 className="mb-4" style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}>
-            Artifact Collection
-          </h1>
-          <p className="text-base" style={{ color: "var(--color-text-secondary)" }}>
-            A visual catalog of objects and diagrams that carry the five-room story.
-          </p>
+      <section className="museum-container pt-20 pb-14 md:pt-28 md:pb-18">
+        <div className="grid gap-9 lg:grid-cols-[minmax(0,1fr)_minmax(300px,430px)] lg:items-start">
+          <div className="max-w-2xl">
+            <p className="text-[0.66rem] tracking-widest uppercase mb-5" style={{ color: "var(--color-accent)" }}>
+              Companion Gallery
+            </p>
+            <h1 className="mb-4" style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}>
+              Artifact Collection
+            </h1>
+            <p className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+              A visual catalog of objects and diagrams that carry the five-room story.
+            </p>
+          </div>
+
+          <ExhibitVisual
+            imagePath={artifactsHeroImage}
+            imageAlt="Companion gallery hero image for artifacts"
+            title="Artifact Gallery"
+            caption="Objects and diagrams arranged by room, from early devices to modern protocols."
+            imageMinHeight={260}
+          />
         </div>
       </section>
 
       <div className="museum-container" style={{ borderTop: "1px solid var(--color-rule)" }} />
 
-      <section className="museum-container py-10 md:py-14">
+      <section className="museum-container py-14 md:py-18">
         <div className="grid gap-px sm:grid-cols-2 lg:grid-cols-3">
           {sortedArtifacts.map((artifact) => {
             const roomOrder = String(orderBySlug[artifact.exhibitSlug] ?? 0).padStart(2, "0");
+            const artifactVisualKey = visualForArtifact(artifact.title);
 
             return (
               <div key={artifact.title}>
-                <p className="mb-2 text-[0.58rem] tracking-widest uppercase" style={{ color: "var(--color-text-dim)" }}>
+                <p className="mb-3 text-[0.64rem] tracking-widest uppercase" style={{ color: "var(--color-text-dim)" }}>
                   Room {roomOrder}
                 </p>
                 <ArtifactPanel
@@ -101,7 +115,7 @@ export default function ArtifactsPage() {
                   description={shortDescription(artifact.description)}
                   status={artifact.status}
                   compact
-                  visual={<ExhibitVisual visualKey={visualForArtifact(artifact.title, artifact.exhibitSlug)} />}
+                  visual={artifactVisualKey ? <ExhibitVisual visualKey={artifactVisualKey} /> : undefined}
                 />
               </div>
             );

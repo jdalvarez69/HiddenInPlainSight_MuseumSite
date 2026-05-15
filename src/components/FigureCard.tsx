@@ -55,21 +55,21 @@ export default function FigureCard({
       </div>
 
       <h4
-        className="text-base leading-snug"
+        className="text-lg leading-snug"
         style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
       >
         {name}
       </h4>
 
       <p
-        className="text-[0.62rem] tracking-widest uppercase mt-1 mb-3"
+        className="text-[0.68rem] tracking-widest uppercase mt-1 mb-3"
         style={{ color: "var(--color-text-dim)" }}
       >
         {role}
       </p>
 
       <p
-        className={`text-sm leading-relaxed ${compact ? "line-clamp-3" : "line-clamp-4"}`}
+        className={`text-base leading-relaxed ${compact ? "line-clamp-3" : "line-clamp-4"}`}
         style={{ color: "var(--color-text-secondary)" }}
       >
         {description}

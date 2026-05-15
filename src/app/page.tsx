@@ -22,14 +22,16 @@ const motifBySlug: Record<string, string> = {
 const thesisLine =
   "Cryptography began as the art of hiding messages and became the science of protecting trust.";
 
+const homeHeroImage = "/images/home/home-hero-collage.png";
+
 export default function Home() {
   return (
     <>
       <section className="museum-container pt-24 pb-18 md:pt-32 md:pb-24">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(320px,430px)] lg:items-start">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(360px,520px)] lg:items-start">
           <div className="max-w-2xl">
             <p
-              className="text-[0.6rem] tracking-widest uppercase mb-5"
+              className="text-[0.65rem] tracking-widest uppercase mb-5"
               style={{ color: "var(--color-accent)" }}
             >
               Museum Entrance
@@ -43,14 +45,14 @@ export default function Home() {
             </h1>
 
             <p
-              className="text-[0.72rem] tracking-[0.18em] uppercase mb-6"
+              className="text-[0.78rem] tracking-[0.16em] uppercase mb-7"
               style={{ color: "var(--color-text-dim)" }}
             >
               {siteMeta.subtitle}
             </p>
 
             <p
-              className="text-lg leading-relaxed max-w-[58ch]"
+              className="text-xl leading-relaxed max-w-[58ch]"
               style={{ color: "var(--color-text-secondary)" }}
             >
               {thesisLine}
@@ -80,11 +82,13 @@ export default function Home() {
             </div>
           </div>
 
-          <div aria-label="Entrance visual">
+          <div aria-label="Entrance hero image">
             <ExhibitVisual
-              visualKey="caesar"
-              title="Entrance Motif"
-              caption="A simple shift that opened a 4,000-year story about trust."
+              imagePath={homeHeroImage}
+              imageAlt="Museum entrance collage connecting ancient ciphers to modern encryption"
+              title="Entrance Collage"
+              caption="A curated visual bridge from early secrecy methods to modern trust infrastructure."
+              imageMinHeight={320}
             />
           </div>
         </div>
@@ -92,10 +96,10 @@ export default function Home() {
 
       <div className="museum-container" style={{ borderTop: "1px solid var(--color-rule)" }} />
 
-      <section className="museum-container py-12 md:py-16">
-        <header className="mb-7">
+      <section className="museum-container py-14 md:py-18">
+        <header className="mb-8">
           <p
-            className="text-[0.6rem] tracking-widest uppercase"
+            className="text-[0.66rem] tracking-widest uppercase"
             style={{ color: "var(--color-text-dim)" }}
           >
             Guided Route

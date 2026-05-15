@@ -46,7 +46,7 @@ export default function ArtifactPanel({
       <header className="mb-4">
         <div className="flex flex-wrap items-start justify-between gap-2 mb-1">
           <h4
-            className="text-base leading-snug"
+            className="text-lg leading-snug"
             style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
           >
             {title}
@@ -64,7 +64,7 @@ export default function ArtifactPanel({
       </header>
 
       <p
-        className={`text-sm leading-relaxed mb-3 ${compact ? "line-clamp-3" : "line-clamp-4"}`}
+        className={`text-base leading-relaxed mb-3 ${compact ? "line-clamp-3" : "line-clamp-4"}`}
         style={{ color: "var(--color-text-secondary)" }}
       >
         {description}

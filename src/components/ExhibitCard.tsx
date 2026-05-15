@@ -69,7 +69,7 @@ export default function ExhibitCard({
         </h3>
 
         <p
-          className="text-[0.68rem] tracking-wider uppercase mb-3"
+          className="text-[0.74rem] tracking-wider uppercase mb-3"
           style={{ color: "var(--color-text-dim)" }}
         >
           {subtitle}
@@ -77,7 +77,7 @@ export default function ExhibitCard({
 
         {hook && (
           <p
-            className="text-sm leading-relaxed line-clamp-2"
+            className="text-base leading-relaxed line-clamp-2"
             style={{ color: "var(--color-text-secondary)" }}
           >
             {hook}
@@ -136,7 +136,7 @@ export default function ExhibitCard({
 
       {/* Subtitle */}
       <p
-        className="text-[0.7rem] tracking-wider uppercase mb-4"
+        className="text-[0.74rem] tracking-wider uppercase mb-4"
         style={{ color: "var(--color-text-dim)" }}
       >
         {subtitle}
@@ -144,7 +144,7 @@ export default function ExhibitCard({
 
       {hook && (
         <p
-          className="text-sm leading-relaxed mb-3 line-clamp-2"
+          className="text-base leading-relaxed mb-3 line-clamp-2"
           style={{ color: "var(--color-text-secondary)" }}
         >
           {hook}
@@ -153,7 +153,7 @@ export default function ExhibitCard({
 
       {showIntro && intro && (
         <p
-          className="text-sm leading-relaxed line-clamp-2"
+          className="text-base leading-relaxed line-clamp-2"
           style={{ color: "var(--color-text-secondary)" }}
         >
           {intro}

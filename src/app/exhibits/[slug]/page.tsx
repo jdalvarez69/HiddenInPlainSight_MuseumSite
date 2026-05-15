@@ -6,19 +6,20 @@ import ArtifactPanel from "@/components/ArtifactPanel";
 import NextRoomCTA from "@/components/NextRoomCTA";
 import ExhibitVisual from "@/components/visuals/ExhibitVisual";
 
-const heroVisualMap = {
-  "secret-writing": "scytale",
-  "states-and-power": "frequency",
-  "machines-of-secrecy": "enigma",
-  "mathematical-turn": "public-private-key",
-  "invisible-shield": "tls",
+const heroImageMap = {
+  "secret-writing": "/images/exhibits/room-01-ancient-secrecy.png",
+  "states-and-power": "/images/exhibits/room-02-state-ciphers.png",
+  "machines-of-secrecy": "/images/exhibits/room-03-machines-of-secrecy.png",
+  "mathematical-turn": "/images/exhibits/room-04-mathematical-turn.png",
+  "invisible-shield": "/images/exhibits/room-05-modern-trust.png",
 } as const;
 
 const artifactVisualMap = {
   "secret-writing": "caesar",
-  "states-and-power": "vigenere",
-  "machines-of-secrecy": "bombe",
-  "invisible-shield": "e2e",
+  "states-and-power": "frequency",
+  "machines-of-secrecy": "enigma",
+  "mathematical-turn": "public-private-key",
+  "invisible-shield": "tls",
 } as const;
 
 const hookBySlug: Record<string, string> = {
@@ -74,11 +75,11 @@ export default async function ExhibitPage({
         </Link>
       </div>
 
-      <section className="museum-container pt-8 pb-12 md:pb-16">
+      <section className="museum-container pt-8 pb-14 md:pb-18">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,410px)] lg:items-start">
           <div className="max-w-2xl">
             <p
-              className="text-[0.6rem] tracking-widest uppercase mb-4"
+              className="text-[0.66rem] tracking-widest uppercase mb-4"
               style={{ color: "var(--color-accent)" }}
             >
               {roomLabel}
@@ -92,30 +93,32 @@ export default async function ExhibitPage({
             </h1>
 
             <p
-              className="text-[0.7rem] tracking-[0.14em] uppercase mb-5"
+              className="text-[0.78rem] tracking-[0.14em] uppercase mb-6"
               style={{ color: "var(--color-text-dim)" }}
             >
               {exhibit.subtitle}
             </p>
 
-            <p className="text-base leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+            <p className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
               {hookBySlug[exhibit.slug]}
             </p>
           </div>
 
           <ExhibitVisual
-            visualKey={heroVisualMap[exhibit.slug as keyof typeof heroVisualMap]}
-            title={`${roomLabel} Visual`}
+            imagePath={heroImageMap[exhibit.slug as keyof typeof heroImageMap]}
+            imageAlt={`${roomLabel} exhibit hero image`}
+            title={`${roomLabel} Hero`}
             caption={exhibit.featuredArtifact.visualHint}
+            imageMinHeight={300}
           />
         </div>
       </section>
 
       <div className="museum-container" style={{ borderTop: "1px solid var(--color-rule)" }} />
 
-      <section className="museum-container py-12 max-w-3xl">
+      <section className="museum-container py-14 max-w-3xl">
         <header className="mb-5">
-          <p className="text-[0.6rem] tracking-widest uppercase" style={{ color: "var(--color-text-dim)" }}>
+          <p className="text-[0.66rem] tracking-widest uppercase" style={{ color: "var(--color-text-dim)" }}>
             In 30 Seconds
           </p>
         </header>
@@ -127,7 +130,7 @@ export default async function ExhibitPage({
                 style={{ backgroundColor: "var(--color-accent-dim)" }}
                 aria-hidden="true"
               />
-              <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+              <p className="text-base leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
                 {point.text}
               </p>
             </li>
@@ -137,9 +140,9 @@ export default async function ExhibitPage({
 
       <div className="museum-container" style={{ borderTop: "1px solid var(--color-rule)" }} />
 
-      <section className="museum-container py-12">
+      <section className="museum-container py-14">
         <header className="mb-5">
-          <p className="text-[0.6rem] tracking-widest uppercase" style={{ color: "var(--color-text-dim)" }}>
+          <p className="text-[0.66rem] tracking-widest uppercase" style={{ color: "var(--color-text-dim)" }}>
             Featured Artifact
           </p>
         </header>
@@ -155,20 +158,20 @@ export default async function ExhibitPage({
 
       <div className="museum-container" style={{ borderTop: "1px solid var(--color-rule)" }} />
 
-      <section className="museum-container py-12 max-w-2xl">
+      <section className="museum-container py-14 max-w-2xl">
         <header className="mb-4">
-          <p className="text-[0.6rem] tracking-widest uppercase" style={{ color: "var(--color-text-dim)" }}>
+          <p className="text-[0.66rem] tracking-widest uppercase" style={{ color: "var(--color-text-dim)" }}>
             Why It Mattered
           </p>
         </header>
-        <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-base leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
           {exhibit.takeaway}
         </p>
       </section>
 
       <section className="museum-container pb-12 max-w-2xl">
         <header className="mb-4">
-          <p className="text-[0.6rem] tracking-widest uppercase" style={{ color: "var(--color-text-dim)" }}>
+          <p className="text-[0.66rem] tracking-widest uppercase" style={{ color: "var(--color-text-dim)" }}>
             Curiosity Handoff
           </p>
         </header>
@@ -180,7 +183,7 @@ export default async function ExhibitPage({
             borderTop: "2px solid var(--color-accent-dim)",
           }}
         >
-          <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-base leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
             {exhibit.transition}
           </p>
         </div>

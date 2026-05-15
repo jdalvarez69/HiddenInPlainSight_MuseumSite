@@ -29,7 +29,7 @@ export default function TimelineRail({
           <li key={`${event.era}-${index}`} className="pl-6 pb-8 relative">
             {showEraDivider && (
               <p
-                className="text-[0.58rem] tracking-widest uppercase mb-3"
+                className="text-[0.64rem] tracking-widest uppercase mb-3"
                 style={{ color: "var(--color-accent)" }}
               >
                 {event.era}
@@ -43,14 +43,14 @@ export default function TimelineRail({
             />
 
             <h4
-              className="text-base leading-snug mb-1"
+              className="text-lg leading-snug mb-1"
               style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
             >
               {event.title}
             </h4>
 
             <p
-              className="text-sm leading-relaxed"
+              className="text-base leading-relaxed"
               style={{ color: "var(--color-text-secondary)" }}
             >
               {event.description}

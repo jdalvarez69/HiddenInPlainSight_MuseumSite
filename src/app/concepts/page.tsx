@@ -3,6 +3,7 @@ import Link from "next/link";
 import { concepts, exhibits } from "@/lib/museum-data";
 import ConceptCard from "@/components/ConceptCard";
 import NextRoomCTA from "@/components/NextRoomCTA";
+import ExhibitVisual from "@/components/visuals/ExhibitVisual";
 
 export const metadata: Metadata = {
   title: "Concept Guide — Hidden in Plain Sight",
@@ -20,6 +21,8 @@ const roomBySlug = Object.fromEntries(
   ])
 );
 
+const conceptsHeroImage = "/images/companions/concepts-hero.png";
+
 function shortExplanation(text: string) {
   const sentence = text.split(". ")[0]?.trim();
   if (!sentence) return text;
@@ -36,23 +39,33 @@ export default function ConceptsPage() {
 
   return (
     <>
-      <section className="museum-container pt-20 pb-12 md:pt-28 md:pb-14">
-        <div className="max-w-2xl">
-          <p className="text-[0.6rem] tracking-widest uppercase mb-5" style={{ color: "var(--color-accent)" }}>
-            Decoder Guide
-          </p>
-          <h1 className="mb-4" style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}>
-            Concepts in Plain Language
-          </h1>
-          <p className="text-base" style={{ color: "var(--color-text-secondary)" }}>
-            Quick definitions for the terms that appear across the museum route.
-          </p>
+      <section className="museum-container pt-20 pb-14 md:pt-28 md:pb-18">
+        <div className="grid gap-9 lg:grid-cols-[minmax(0,1fr)_minmax(300px,430px)] lg:items-start">
+          <div className="max-w-2xl">
+            <p className="text-[0.66rem] tracking-widest uppercase mb-5" style={{ color: "var(--color-accent)" }}>
+              Decoder Guide
+            </p>
+            <h1 className="mb-4" style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}>
+              Concepts in Plain Language
+            </h1>
+            <p className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+              Quick definitions for the terms that appear across the museum route.
+            </p>
+          </div>
+
+          <ExhibitVisual
+            imagePath={conceptsHeroImage}
+            imageAlt="Companion hero image for concepts page"
+            title="Concept Decoder"
+            caption="Foundational ideas that make each room legible at a glance."
+            imageMinHeight={260}
+          />
         </div>
       </section>
 
       <div className="museum-container" style={{ borderTop: "1px solid var(--color-rule)" }} />
 
-      <section className="museum-container py-10 md:py-14">
+      <section className="museum-container py-14 md:py-18">
         <div className="grid gap-px md:grid-cols-2 lg:grid-cols-3">
           {sortedConcepts.map((concept) => (
             <ConceptCard
