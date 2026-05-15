@@ -10,47 +10,21 @@ export const metadata: Metadata = {
     "How the museum was planned, researched, built, and reviewed through a structured AI workflow.",
 };
 
-// The workflow phases — concise descriptions of what each step involved.
-const workflowSteps = [
+const toolRoles = [
   {
-    label: "Topic and concept planning",
-    description:
-      "I defined topic, thesis, audience, exhibit structure, and design direction before writing code. Planning documents set clear boundaries for later AI work.",
+    title: "ChatGPT",
+    usedFor:
+      "Topic framing, research organization, project strategy, prompt writing, critique, and README/presentation support.",
   },
   {
-    label: "Research organization",
-    description:
-      "I organized sources before writing exhibit content. Claims without support were tagged [VERIFY] and kept out of production copy.",
+    title: "GitHub Copilot Agent Mode",
+    usedFor:
+      "Creating files, implementing components and routes, running terminal commands, fixing build errors, Git workflow actions, and deployment setup.",
   },
   {
-    label: "Design system creation",
-    description:
-      "I defined palette, typography, spacing, and tone in writing before implementation. The final build uses system serif/sans/mono stacks to avoid external font-fetch dependency during static builds.",
-  },
-  {
-    label: "Controlled content writing",
-    description:
-      "Site copy was drafted in a single source-of-truth document (SITE_COPY.md) before pages were built. Content in code had to be source-traceable.",
-  },
-  {
-    label: "Structured AI implementation",
-    description:
-      "Each build step was scoped in a single request with explicit file, data, and design constraints. AI executed bounded tasks; it did not choose structure.",
-  },
-  {
-    label: "Lint and build testing",
-    description:
-      "Every step ended with npm run lint and npm run build. Failures were fixed before advancing.",
-  },
-  {
-    label: "Review and documentation",
-    description:
-      "Major AI contributions were logged in AI_ORCHESTRATION_LOG.md, and acceptance criteria are tracked in QA_REVIEW_LOG.md.",
-  },
-  {
-    label: "Final visual polish",
-    description:
-      "I added a curated local hero-image layer and reduced repeated SVG diagram use so public pages stay visual, readable, and less cluttered.",
+    title: "Human Direction",
+    usedFor:
+      "Choosing the topic, approving or rejecting output, identifying weak design choices, deciding when to revise, and making final judgments.",
   },
 ];
 
@@ -59,32 +33,32 @@ const assignmentConnections = [
   {
     requirement: "Research",
     explanation:
-      "Research was organized before writing. Sources are documented in RESEARCH_NOTES.md and traced to claims in the data file.",
+      "Research was organized first, then mapped to the exhibit narrative. Source tracking remains visible in the data layer and project docs.",
   },
   {
     requirement: "Planning",
     explanation:
-      "Six planning documents were completed before implementation. The five-exhibit structure was set before coding.",
+      "Project direction was defined before coding: thesis, route, visual direction, and content model were set early and reused throughout implementation.",
   },
   {
     requirement: "Design judgment",
     explanation:
-      "Editorial archival modernism was chosen deliberately: warm parchment tones, serif hierarchy, restrained texture, and no decorative code aesthetics.",
+      "The visual language was intentionally curated and revised after testing. Weak sections were reworked instead of left in a draft state.",
   },
   {
     requirement: "AI orchestration",
     explanation:
-      "AI was used throughout, but each task was scoped and reviewed. It did not choose topic, thesis, design direction, or final content decisions.",
+      "ChatGPT and Copilot were used for distinct roles under bounded prompts. I directed the workflow and approved all final outputs.",
   },
   {
     requirement: "Visual coherence",
     explanation:
-      "The design system is implemented through shared CSS tokens, local hero imagery, and restrained supporting diagrams applied consistently across pages.",
+      "Shared design tokens, consistent card structure, local hero images, and controlled supporting diagrams maintain continuity across routes.",
   },
   {
     requirement: "Educational purpose",
     explanation:
-      "The site uses a linear guided route for visitors with no prior background. Companion pages support that route rather than replacing it.",
+      "The guided five-room sequence supports first-time learners, while companion pages provide context without breaking the exhibit route.",
   },
 ];
 
@@ -110,9 +84,9 @@ export default function ProcessPage() {
             className="text-lg leading-relaxed"
             style={{ color: "var(--color-text-secondary)", maxWidth: "60ch" }}
           >
-            This site was not made from one giant prompt. It was built through
-            staged planning, organized research, written design rules, and
-            bounded implementation tasks.
+            This site was not built from one giant prompt. It was developed through planning,
+            research organization, design rules, bounded Copilot implementation, visual
+            revision, and repeated QA.
           </p>
         </div>
       </section>
@@ -127,13 +101,13 @@ export default function ProcessPage() {
       <section className="museum-container py-10 max-w-2xl">
         <CuratorNote label="Student's Note">
           <p>
-            I used AI as a structured assistant for planning, setup,
-            implementation, and error checks. Project direction, thesis, design,
-            and final content decisions were mine.
+            I used ChatGPT and GitHub Copilot differently. ChatGPT helped me plan,
+            critique, organize, and write. Copilot helped me implement, run checks,
+            and manage project files.
           </p>
           <p className="mt-3">
-            Significant AI interactions were logged as the work progressed so I
-            could explain what the AI did and what I decided.
+            I made the final decisions about topic, structure, design direction,
+            accepted output, and revisions.
           </p>
         </CuratorNote>
       </section>
@@ -144,90 +118,48 @@ export default function ProcessPage() {
         style={{ borderTop: "1px solid var(--color-rule)" }}
       />
 
-      {/* ── Process Stages ───────────────────────────────────────────────── */}
+      {/* ── Tool Roles ───────────────────────────────────────────────────── */}
       <section className="museum-container py-14">
         <header className="mb-10">
           <p
-            className="text-[0.6rem] tracking-widest uppercase mb-3"
+            className="text-[0.66rem] tracking-widest uppercase mb-3"
             style={{ color: "var(--color-text-dim)" }}
           >
-            {processStages.length} documented stages
+            Tool roles
           </p>
           <h2
             className="text-2xl leading-snug max-w-xl"
             style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
           >
-            What the AI did at each stage
+            How each role was used
           </h2>
         </header>
 
-        <div className="max-w-2xl space-y-px">
-          {processStages.map((stage, index) => (
+        <div className="grid gap-px md:grid-cols-3">
+          {toolRoles.map((role) => (
             <article
-              key={index}
+              key={role.title}
               className="p-6"
               style={{
                 backgroundColor: "var(--color-bg-surface)",
                 border: "1px solid var(--color-border)",
-                borderLeft: "3px solid var(--color-accent-dim)",
               }}
             >
               <p
-                className="text-[0.6rem] tracking-widest uppercase mb-2"
+                className="text-[0.66rem] tracking-widest uppercase mb-2"
                 style={{ color: "var(--color-accent)" }}
               >
-                Stage {String(index + 1).padStart(2, "0")}
+                Used for
               </p>
               <h3
-                className="text-base leading-snug mb-3"
+                className="text-lg leading-snug mb-3"
                 style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
               >
-                {stage.stage}
+                {role.title}
               </h3>
-              <dl className="space-y-2">
-                <div>
-                  <dt
-                    className="text-[0.6rem] tracking-widest uppercase"
-                    style={{ color: "var(--color-text-dim)" }}
-                  >
-                    Tool
-                  </dt>
-                  <dd
-                    className="text-sm mt-0.5"
-                    style={{ color: "var(--color-text-secondary)" }}
-                  >
-                    {stage.tool}
-                  </dd>
-                </div>
-                <div>
-                  <dt
-                    className="text-[0.6rem] tracking-widest uppercase"
-                    style={{ color: "var(--color-text-dim)" }}
-                  >
-                    Goal
-                  </dt>
-                  <dd
-                    className="text-sm mt-0.5"
-                    style={{ color: "var(--color-text-secondary)" }}
-                  >
-                    {stage.goal}
-                  </dd>
-                </div>
-                <div>
-                  <dt
-                    className="text-[0.6rem] tracking-widest uppercase"
-                    style={{ color: "var(--color-text-dim)" }}
-                  >
-                    Result
-                  </dt>
-                  <dd
-                    className="text-sm mt-0.5"
-                    style={{ color: "var(--color-text-secondary)" }}
-                  >
-                    {stage.result}
-                  </dd>
-                </div>
-              </dl>
+              <p className="text-base leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                {role.usedFor}
+              </p>
             </article>
           ))}
         </div>
@@ -239,55 +171,67 @@ export default function ProcessPage() {
         style={{ borderTop: "1px solid var(--color-rule)" }}
       />
 
-      {/* ── Workflow explanation ──────────────────────────────────────────── */}
+      {/* ── Condensed Workflow ───────────────────────────────────────────── */}
       <section className="museum-container py-14 max-w-2xl">
         <header className="mb-8">
           <p
-            className="text-[0.6rem] tracking-widest uppercase mb-3"
+            className="text-[0.66rem] tracking-widest uppercase mb-3"
             style={{ color: "var(--color-text-dim)" }}
           >
-            How the workflow was structured
+            Condensed workflow
           </p>
           <h2
             className="text-2xl leading-snug"
             style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
           >
-            Each step was completed and reviewed before the next began.
+            Six stages from direction to deployment
           </h2>
         </header>
 
-        <ol
-          className="space-y-0 list-none p-0 m-0"
-          style={{ borderLeft: "1px solid var(--color-rule)" }}
-        >
-          {workflowSteps.map((step, index) => (
-            <li key={index} className="pl-6 pb-8 relative">
-              <span
-                className="absolute left-0 top-1.5 -translate-x-1/2 w-2 h-2 rounded-full"
-                style={{ backgroundColor: "var(--color-accent-dim)" }}
-                aria-hidden="true"
-              />
+        <div className="space-y-px">
+          {processStages.map((stage, index) => (
+            <article
+              key={stage.stage}
+              className="p-6"
+              style={{
+                backgroundColor: "var(--color-bg-surface)",
+                border: "1px solid var(--color-border)",
+                borderLeft: "3px solid var(--color-accent-dim)",
+              }}
+            >
               <p
-                className="text-[0.6rem] tracking-widest uppercase mb-1"
+                className="text-[0.66rem] tracking-widest uppercase mb-2"
                 style={{ color: "var(--color-accent)" }}
               >
-                {String(index + 1).padStart(2, "0")}
+                Stage {String(index + 1).padStart(2, "0")}
               </p>
               <h3
-                className="text-sm font-normal leading-snug mb-2"
+                className="text-lg leading-snug mb-3"
                 style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
               >
-                {step.label}
+                {stage.stage}
               </h3>
               <p
-                className="text-sm leading-relaxed"
+                className="text-base leading-relaxed"
                 style={{ color: "var(--color-text-secondary)" }}
               >
-                {step.description}
+                {stage.goal}
               </p>
-            </li>
+              <p
+                className="text-base leading-relaxed mt-3"
+                style={{ color: "var(--color-text-secondary)" }}
+              >
+                {stage.result}
+              </p>
+              <p
+                className="text-[0.66rem] tracking-widest uppercase mt-4"
+                style={{ color: "var(--color-text-dim)" }}
+              >
+                Tools: {stage.tool}
+              </p>
+            </article>
           ))}
-        </ol>
+        </div>
       </section>
 
       {/* ── Rule ─────────────────────────────────────────────────────────── */}
@@ -300,7 +244,7 @@ export default function ProcessPage() {
       <section className="museum-container py-14 max-w-2xl">
         <header className="mb-8">
           <p
-            className="text-[0.6rem] tracking-widest uppercase mb-3"
+            className="text-[0.66rem] tracking-widest uppercase mb-3"
             style={{ color: "var(--color-text-dim)" }}
           >
             Assignment requirements
@@ -324,13 +268,13 @@ export default function ProcessPage() {
               }}
             >
               <h3
-                className="text-sm leading-snug mb-2"
+                className="text-base leading-snug mb-2"
                 style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
               >
                 {item.requirement}
               </h3>
               <p
-                className="text-sm leading-relaxed"
+                className="text-base leading-relaxed"
                 style={{ color: "var(--color-text-secondary)" }}
               >
                 {item.explanation}
@@ -350,9 +294,9 @@ export default function ProcessPage() {
       <section className="museum-container py-10 max-w-2xl">
         <CuratorNote label="Final Note">
           <p>
-            The AI log, QA checklist, design system, and process page document
-            how this project was made. The museum content was the goal; this
-            documentation shows the process was intentional.
+            The goal was not to prove AI could generate pages. The goal was to
+            show that I could direct AI through a structured process to build and
+            improve a purposeful digital exhibit.
           </p>
         </CuratorNote>
       </section>

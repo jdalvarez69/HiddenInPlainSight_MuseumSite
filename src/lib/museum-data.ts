@@ -914,80 +914,45 @@ export const figures: Figure[] = [
 
 export const processStages: ProcessStage[] = [
   {
-    stage: "Topic selection and conceptual planning",
-    tool: "GitHub Copilot (Claude Sonnet)",
-    goal: "Define the project topic, thesis, brand direction, design style, and exhibit structure.",
+    stage: "Concept and Museum Direction",
+    tool: "ChatGPT + Human Direction",
+    goal: "I chose cryptography as the focus and defined the thesis, exhibit route, design style, archetype, and Cialdini principle before implementation.",
     result:
-      "PROJECT_BRIEF.md, CONTENT_MODEL.md, DESIGN_SYSTEM.md, AI_ORCHESTRATION_LOG.md, QA_REVIEW_LOG.md, and PRESENTATION_NOTES.md created. Exhibit route condensed from six exhibits to five.",
+      "Planning documents established project constraints early so later implementation stayed aligned with the museum concept.",
   },
   {
-    stage: "Technical foundation setup",
-    tool: "GitHub Copilot (Claude Sonnet)",
-    goal: "Initialize a Next.js project with TypeScript, Tailwind CSS, ESLint, App Router, and src directory.",
+    stage: "Research and Source Organization",
+    tool: "ChatGPT + Human Direction",
+    goal: "I organized source packs and research notes, then separated verified claims from items that still needed confirmation.",
     result:
-      "Next.js 16.2.6 project initialized. Package name corrected to a valid lowercase npm name. Turbopack root config added to silence a workspace warning.",
+      "Source discipline was preserved in the data layer and documentation, and unresolved verification items remained explicitly tracked.",
   },
   {
-    stage: "Research planning and source organization",
-    tool: "GitHub Copilot (Claude Sonnet) under student direction",
-    goal: "Organize research direction and identify credible sources for each exhibit.",
+    stage: "Design System and Content Model",
+    tool: "ChatGPT + Human Direction",
+    goal: "I defined editorial archival modernism, the Sage + Explorer archetype, Curiosity Gap framing, page structure, and reusable content patterns.",
     result:
-      "RESEARCH_NOTES.md created with two verified source packs totaling 20 sources, each assigned to an exhibit. [VERIFY] tags applied to all unconfirmed claims.",
+      "These rules became the baseline for writing, component behavior, and route-level consistency across the site.",
   },
   {
-    stage: "Controlled site copy creation",
-    tool: "GitHub Copilot (Claude Sonnet) under student direction",
-    goal: "Convert verified research into controlled museum copy for all five exhibits and companion pages, without fabricating any historical content.",
+    stage: "Implementation with Copilot",
+    tool: "GitHub Copilot Agent Mode + Human Direction",
+    goal: "Copilot created project files, data structures, components, routes, and process documentation under bounded prompts and explicit constraints.",
     result:
-      "SITE_COPY.md created as source-of-truth writing document. No content added without a supporting source. Unverified items retained as [VERIFY] placeholders and excluded from production.",
+      "I reviewed outputs continuously, accepted or rejected changes, and kept structure, content, and tone aligned with the museum brief.",
   },
   {
-    stage: "Structured data layer",
-    tool: "GitHub Copilot (Claude Sonnet) under student direction",
-    goal: "Create typed TypeScript data file from SITE_COPY.md to serve as the source of truth for website content.",
+    stage: "Visual Revision",
+    tool: "ChatGPT critique + GitHub Copilot Agent Mode + Human Direction",
+    goal: "After the first deployment, I identified that the public experience felt too wordy and visually flat.",
     result:
-      "src/lib/museum-data.ts created with full TypeScript interfaces and exported data for all content types. status? field added to support honest display of unverified items.",
+      "The public experience was redesigned with local hero images, reduced diagram clutter, and improved readability while preserving the guided route.",
   },
   {
-    stage: "Global design system implementation",
-    tool: "GitHub Copilot (Claude Sonnet) under student direction",
-    goal: "Implement the design system from DESIGN_SYSTEM.md as production CSS, root layout, and sitewide navigation.",
+    stage: "QA, Build, and Deployment",
+    tool: "GitHub Copilot Agent Mode + Human Direction",
+    goal: "Lint/build checks were run repeatedly, GitHub workflow deployment was configured, and reliability issues were resolved before final pushes.",
     result:
-      "globals.css replaced with 10 CSS custom property tokens and archival dot-grid texture. layout.tsx updated with system serif/sans/mono stacks, metadata, MuseumNav component, and footer to avoid external font-fetch build dependencies.",
-  },
-  {
-    stage: "Reusable component system",
-    tool: "GitHub Copilot (Claude Sonnet) under student direction",
-    goal: "Build 9 shared server components for all recurring content types.",
-    result:
-      "StatusBadge, EvidencePanel, ExhibitCard, ArtifactPanel, ConceptCard, FigureCard, TimelineRail, CuratorNote, and NextRoomCTA created in src/components/. All are server components with no client-side JavaScript.",
-  },
-  {
-    stage: "Homepage and exhibit route implementation",
-    tool: "GitHub Copilot (Claude Sonnet) under student direction",
-    goal: "Build the homepage, exhibits index, and five dynamic exhibit detail pages.",
-    result:
-      "src/app/page.tsx (homepage), src/app/exhibits/page.tsx (gallery lobby), and src/app/exhibits/[slug]/page.tsx (5 static rooms via generateStaticParams) implemented. Build passed with zero lint errors.",
-  },
-  {
-    stage: "Companion page implementation",
-    tool: "GitHub Copilot (Claude Sonnet) under student direction",
-    goal: "Build the five companion pages: Timeline, Artifacts, Concepts, Figures, and Process.",
-    result:
-      "All five companion pages built and verified. Every navigation link in the museum resolves to a built page. Total: 15 static routes. ESLint and TypeScript clean at each step.",
-  },
-  {
-    stage: "Final visual presentation pass",
-    tool: "GitHub Copilot (GPT-5.3-Codex) under student direction",
-    goal: "Reduce SVG clutter in public listings, prioritize local hero image layer, and tighten readability for final submission.",
-    result:
-      "Homepage, exhibit rooms, and companion pages now use curated local hero images. Diagram usage is limited to controlled supporting placements only. Readability and section spacing were increased while preserving route structure and source tracking.",
-  },
-  {
-    stage: "Ongoing QA through lint and build verification",
-    tool: "npm run lint && npm run build (run after every implementation step)",
-    goal: "Catch TypeScript errors, ESLint violations, and broken static generation before moving to the next step.",
-    result:
-      "Every implementation step ended with a passing build. One server component event handler error was caught and corrected on the homepage. No other build failures occurred.",
+      "The final build uses system serif/sans/mono font stacks to avoid external font build dependency in static exports.",
   },
 ];
