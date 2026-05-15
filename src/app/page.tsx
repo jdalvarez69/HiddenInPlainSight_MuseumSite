@@ -1,65 +1,218 @@
-import Image from "next/image";
+import Link from "next/link";
+import { siteMeta, exhibits, artifacts } from "@/lib/museum-data";
+import ExhibitCard from "@/components/ExhibitCard";
+import ArtifactPanel from "@/components/ArtifactPanel";
+import CuratorNote from "@/components/CuratorNote";
+
+// Three artifacts chosen to represent the arc of the story:
+// ancient/manual, machine-era, modern/digital
+const featuredArtifacts = [
+  artifacts.find((a) => a.title === "Scytale"),
+  artifacts.find((a) => a.title === "Enigma Rotor System Diagram"),
+  artifacts.find((a) => a.title === "TLS Handshake Sequence"),
+].filter(Boolean) as typeof artifacts;
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      {/* ── Hero ─────────────────────────────────────────────────────────── */}
+      <section className="museum-container pt-24 pb-20 md:pt-36 md:pb-28">
+        <div className="max-w-2xl">
+          <p
+            className="text-[0.6rem] tracking-widest uppercase mb-6"
+            style={{ color: "var(--color-accent)" }}
+          >
+            A Guided Digital Exhibit
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+          <h1
+            className="mb-4"
+            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            {siteMeta.title}
+          </h1>
+
+          <p
+            className="text-base tracking-wider uppercase mb-8"
+            style={{ color: "var(--color-text-dim)" }}
+          >
+            {siteMeta.subtitle}
+          </p>
+
+          <p
+            className="text-lg leading-relaxed mb-12"
+            style={{ color: "var(--color-text-secondary)", maxWidth: "62ch" }}
+          >
+            {siteMeta.thesis}
+          </p>
+
+          <div className="flex flex-wrap gap-4">
+            <Link
+              href="/exhibits"
+              className="inline-block px-8 py-3 text-[0.7rem] tracking-widest uppercase transition-colors border border-[#c4973a] text-[#c4973a] hover:bg-[#c4973a] hover:text-[#1a1714]"
+            >
+              Enter the Museum
+            </Link>
+            <Link
+              href="/process"
+              className="inline-block px-8 py-3 text-[0.7rem] tracking-widest uppercase transition-colors border border-[#2e2b26] text-[#9b9388] hover:border-[#9b9388] hover:text-[#f0ead8]"
+            >
+              About This Project
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Rule ─────────────────────────────────────────────────────────── */}
+      <div
+        className="museum-container"
+        style={{ borderTop: "1px solid var(--color-rule)" }}
+      />
+
+      {/* ── Curator Note ─────────────────────────────────────────────────── */}
+      <section className="museum-container py-12 max-w-2xl">
+        <CuratorNote>
+          <p>
+            This museum follows cryptography from the first attempts at
+            concealment in antiquity through the cipher machines of the
+            twentieth century, and on to the mathematical foundations that
+            make modern digital trust possible. Five rooms. One continuous
+            story.
+          </p>
+          <p className="mt-3">
+            All historical content is drawn from verified sources. Anything
+            that still needs confirmation is clearly marked. Nothing here has
+            been invented.
+          </p>
+        </CuratorNote>
+      </section>
+
+      {/* ── Guided Route Preview ─────────────────────────────────────────── */}
+      <section className="museum-container py-12">
+        <header className="mb-8">
+          <p
+            className="text-[0.6rem] tracking-widest uppercase mb-2"
+            style={{ color: "var(--color-text-dim)" }}
+          >
+            The Exhibit Route
+          </p>
+          <h2
+            className="text-2xl"
+            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+          >
+            Five Rooms. One Story.
+          </h2>
+        </header>
+
+        <div className="grid gap-px sm:grid-cols-2 lg:grid-cols-3">
+          {exhibits.map((exhibit) => (
+            <ExhibitCard
+              key={exhibit.slug}
+              order={exhibit.order}
+              title={exhibit.title}
+              subtitle={exhibit.subtitle}
+              intro={exhibit.intro}
+              href={`/exhibits/${exhibit.slug}`}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* ── Rule ─────────────────────────────────────────────────────────── */}
+      <div
+        className="museum-container my-4"
+        style={{ borderTop: "1px solid var(--color-rule)" }}
+      />
+
+      {/* ── Artifact Preview ─────────────────────────────────────────────── */}
+      <section className="museum-container py-12">
+        <header className="mb-8">
+          <p
+            className="text-[0.6rem] tracking-widest uppercase mb-2"
+            style={{ color: "var(--color-text-dim)" }}
+          >
+            From the Collection
+          </p>
+          <h2
+            className="text-2xl"
+            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+          >
+            Selected Objects
+          </h2>
+          <p
+            className="mt-2 text-sm"
+            style={{ color: "var(--color-text-secondary)", maxWidth: "56ch" }}
+          >
+            Each artifact marks a specific moment in the history of how people
+            protected — or broke — a secret.
+          </p>
+        </header>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredArtifacts.map((artifact) => (
+            <ArtifactPanel
+              key={artifact.title}
+              title={artifact.title}
+              era={artifact.era}
+              description={artifact.description}
+              status={artifact.status}
+              sources={artifact.sources}
+            />
+          ))}
+        </div>
+
+        <div className="mt-6">
+          <Link
+            href="/artifacts"
+            className="text-[0.65rem] tracking-widest uppercase transition-colors"
+            style={{ color: "var(--color-text-dim)" }}
+          >
+            View all artifacts &rarr;
+          </Link>
+        </div>
+      </section>
+
+      {/* ── Rule ─────────────────────────────────────────────────────────── */}
+      <div
+        className="museum-container my-4"
+        style={{ borderTop: "1px solid var(--color-rule)" }}
+      />
+
+      {/* ── Closing Invitation ───────────────────────────────────────────── */}
+      <section className="museum-container py-20 md:py-28">
+        <div className="max-w-xl">
+          <p
+            className="text-[0.6rem] tracking-widest uppercase mb-4"
+            style={{ color: "var(--color-text-dim)" }}
+          >
+            Begin Here
+          </p>
+          <h2
+            className="text-3xl mb-6 leading-snug"
+            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+          >
+            The story starts in antiquity.<br />It is still being written.
+          </h2>
+          <p
+            className="text-base leading-relaxed mb-10"
+            style={{ color: "var(--color-text-secondary)", maxWidth: "52ch" }}
+          >
+            Follow the guided route from the first secret messages to the
+            mathematics that protects every secure connection you make today.
+          </p>
+          <Link
+            href="/exhibits"
+            className="inline-block px-10 py-3 text-[0.7rem] tracking-widest uppercase transition-colors"
+            style={{
+              border: "1px solid var(--color-accent)",
+              color: "var(--color-accent)",
+            }}
+          >
+            Begin the Exhibit Route
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }
+

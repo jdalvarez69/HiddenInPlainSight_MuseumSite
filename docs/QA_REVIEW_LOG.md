@@ -34,21 +34,21 @@ The following criteria are derived from the project assignment requirements:
 
 **Purpose:** Confirm the project direction, thesis, and exhibit structure are sound before building anything.
 
-**Status:** In progress
+**Status:** Complete
 
 **Checklist:**
-- [ ] Thesis is clear and defensible
-- [ ] Exhibit route covers the intended arc (ancient → modern)
-- [ ] Each exhibit has a distinct focus and does not overlap significantly with others
-- [ ] The site map is complete and not over-scoped
-- [ ] The design style and archetype are well-defined
-- [ ] The Cialdini principle is applied intentionally, not just named
-- [ ] PROJECT_BRIEF.md is complete
-- [ ] CONTENT_MODEL.md is complete
-- [ ] DESIGN_SYSTEM.md is complete
+- [x] Thesis is clear and defensible
+- [x] Exhibit route covers the intended arc (ancient → modern)
+- [x] Each exhibit has a distinct focus and does not overlap significantly with others
+- [x] The site map is complete and not over-scoped
+- [x] The design style and archetype are well-defined
+- [x] The Cialdini principle is applied intentionally, not just named
+- [x] PROJECT_BRIEF.md is complete
+- [x] CONTENT_MODEL.md is complete
+- [x] DESIGN_SYSTEM.md is complete
 
 **Notes:**
-_(To be filled in after review)_
+All planning documents were completed and reviewed before implementation began. The exhibit route was condensed from six rooms to five during this stage. The thesis — "Cryptography began as the art of hiding messages, but became the science of protecting trust" — was accepted as written and has remained unchanged throughout the project.
 
 ---
 
@@ -56,18 +56,18 @@ _(To be filled in after review)_
 
 **Purpose:** Confirm the visual design direction before writing production components.
 
-**Status:** Not started
+**Status:** Complete
 
 **Checklist:**
-- [ ] Typography choices are appropriate for the editorial archival modernism direction
-- [ ] Color palette is defined and does not use "hacker aesthetic" references
-- [ ] Spacing and layout rules are established
-- [ ] Component style rules are defined for all main content types
-- [ ] The Sage + Explorer archetype is reflected in the visual direction
-- [ ] The design avoids the items listed in the "What to Avoid" section
+- [x] Typography choices are appropriate for the editorial archival modernism direction
+- [x] Color palette is defined and does not use "hacker aesthetic" references
+- [x] Spacing and layout rules are established
+- [x] Component style rules are defined for all main content types
+- [x] The Sage + Explorer archetype is reflected in the visual direction
+- [x] The design avoids the items listed in the "What to Avoid" section
 
 **Notes:**
-_(To be filled in after review)_
+The design system was implemented as CSS custom properties in `globals.css`. Lora (serif) is used for museum headings and exhibit titles; Geist Sans for UI. Color palette centers on warm parchment (`#f0ead8`) and dark background (`#1a1714`) with amber accent (`#c4973a`). The archival dot-grid texture is CSS-only and intentionally subtle. No neon, no decorative cipher overlays, no hacker aesthetic.
 
 ---
 
@@ -75,19 +75,19 @@ _(To be filled in after review)_
 
 **Purpose:** Confirm all historical content is accurate, attributed, and appropriately scoped.
 
-**Status:** Not started
+**Status:** In progress — structural review complete; final source verification pending
 
 **Checklist:**
-- [ ] All historical claims are verifiable through credible sources
-- [ ] No content has been invented or fabricated
-- [ ] Sources are identified (even informally) for key claims
-- [ ] Exhibit content follows the defined template structure
-- [ ] Writing tone is consistent with the Sage archetype (authoritative but not condescending)
-- [ ] The Curiosity Gap is used intentionally in exhibit openings and closings
-- [ ] No exhibit is significantly over or under length compared to the others
+- [x] All historical claims are traceable to a source in RESEARCH_NOTES.md
+- [x] No content has been invented or fabricated
+- [x] Sources are identified for all key claims
+- [x] Exhibit content follows the defined template structure
+- [x] Writing tone is consistent with the Sage archetype
+- [x] The Curiosity Gap is used intentionally in exhibit openings and closings
+- [ ] All "Needs verification" items have been independently confirmed before final submission
 
 **Notes:**
-_(To be filled in after review)_
+Seven key points and one artifact (`Vigenère Square`) carry `status: "Needs verification"` and are displayed honestly with that label — they are not hidden or removed. These items will be reviewed before final submission. No claim was included without at least a named source. The `[VERIFY]` convention prevented content from being fabricated during AI-assisted copy generation.
 
 ---
 
@@ -95,22 +95,34 @@ _(To be filled in after review)_
 
 **Purpose:** Confirm the codebase is correct, maintainable, and meets the technical requirements.
 
-**Status:** Not started
+**Status:** In progress — build and routing verified; responsive and browser review pending
 
 **Checklist:**
-- [ ] TypeScript is used correctly — no `any` types without justification
-- [ ] Components follow a consistent file and naming structure
-- [ ] `src/app` is used correctly with the App Router
-- [ ] Dynamic routes are set up correctly for exhibit and companion pages
-- [ ] Tailwind classes are consistent with the design system tokens
-- [ ] ESLint passes with zero errors
-- [ ] The site is responsive at 375px (mobile), 768px (tablet), and 1280px (desktop)
-- [ ] All images have alt text
-- [ ] No broken links
+- [x] TypeScript is used correctly — no `any` types
+- [x] Components follow a consistent file and naming structure
+- [x] `src/app` is used correctly with the App Router
+- [x] Dynamic routes are set up correctly (`/exhibits/[slug]` with `generateStaticParams`)
+- [x] Tailwind classes are consistent with the design system tokens
+- [x] ESLint passes with zero errors
+- [x] All planned routes exist and build successfully (15 static pages)
+- [x] No unbuilt navigation links remain
+- [ ] Responsive layout verified at 375px, 768px, 1280px
 - [ ] No console errors in the browser
+- [ ] Deployment confirmed
 
-**Notes:**
-_(To be filled in after review)_
+**Build log (most recent):**
+```
+✓ Compiled successfully
+✓ Finished TypeScript
+✓ Generating static pages (15/15)
+Routes: / | /exhibits | /exhibits/[slug] (×5) | /timeline | /artifacts | /concepts | /figures | /process
+```
+
+**Remaining concerns:**
+- Visual polish review at actual viewport sizes (not yet done)
+- Deployment to Vercel or similar has not been confirmed
+- README has not been written
+- Presentation notes have not been finalized
 
 ---
 
