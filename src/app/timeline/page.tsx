@@ -49,20 +49,6 @@ export default function TimelinePage() {
         <div className="max-w-2xl">
           <TimelineRail events={timelineEvents} />
         </div>
-
-        <div className="max-w-2xl mt-12">
-          <p
-            className="text-[0.66rem] tracking-widest uppercase mb-4"
-            style={{ color: "var(--color-text-dim)" }}
-          >
-            Post-Quantum Horizon
-          </p>
-          <ExhibitVisual
-            visualKey="post-quantum"
-            title="Post-Quantum Transition"
-            caption="NIST finalized initial post-quantum standards in 2024, beginning migration planning."
-          />
-        </div>
       </section>
 
       <section className="museum-container pb-16 max-w-2xl">

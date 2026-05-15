@@ -115,8 +115,9 @@ I chose the topic, defined the thesis, selected the design direction, decided wh
 After the first deployed version, I judged the site as structurally strong but too text-heavy and not visually engaging enough. I then directed a focused polish sprint.
 
 Polish outcomes:
-- Custom local SVG visual system created (`src/components/visuals/`) and integrated into homepage, exhibit rooms, and companion pages
-- Public production-note text (`Visual: ...`) removed from artifact cards
+- Curated local hero image layer added for homepage, exhibit rooms, and companion pages (`public/images/...`)
+- Custom local SVG visual system retained for controlled supporting diagrams only
+- Public production-note text for artifact visuals removed from artifact cards
 - Public verification badges suppressed for visitor-facing polish while `status` fields remain in `museum-data.ts` and verification work remains documented in project docs
 - Public-facing copy tightened to improve scanability and rhythm without changing the thesis or source discipline
 - No external image assets or hotlinked media used

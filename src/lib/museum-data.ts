@@ -953,7 +953,7 @@ export const processStages: ProcessStage[] = [
     tool: "GitHub Copilot (Claude Sonnet) under student direction",
     goal: "Implement the design system from DESIGN_SYSTEM.md as production CSS, root layout, and sitewide navigation.",
     result:
-      "globals.css replaced with 10 CSS custom property tokens and archival dot-grid texture. layout.tsx updated with Lora serif and Geist Sans fonts, metadata, MuseumNav component, and footer.",
+      "globals.css replaced with 10 CSS custom property tokens and archival dot-grid texture. layout.tsx updated with system serif/sans/mono stacks, metadata, MuseumNav component, and footer to avoid external font-fetch build dependencies.",
   },
   {
     stage: "Reusable component system",
@@ -975,6 +975,13 @@ export const processStages: ProcessStage[] = [
     goal: "Build the five companion pages: Timeline, Artifacts, Concepts, Figures, and Process.",
     result:
       "All five companion pages built and verified. Every navigation link in the museum resolves to a built page. Total: 15 static routes. ESLint and TypeScript clean at each step.",
+  },
+  {
+    stage: "Final visual presentation pass",
+    tool: "GitHub Copilot (GPT-5.3-Codex) under student direction",
+    goal: "Reduce SVG clutter in public listings, prioritize local hero image layer, and tighten readability for final submission.",
+    result:
+      "Homepage, exhibit rooms, and companion pages now use curated local hero images. Diagram usage is limited to controlled supporting placements only. Readability and section spacing were increased while preserving route structure and source tracking.",
   },
   {
     stage: "Ongoing QA through lint and build verification",

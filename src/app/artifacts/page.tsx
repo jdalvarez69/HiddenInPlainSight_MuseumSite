@@ -11,50 +11,9 @@ export const metadata: Metadata = {
     "Objects, diagrams, machines, and symbols from the history of cryptography — one from each stage of the museum route.",
 };
 
-type VisualKey =
-  | "scytale"
-  | "caesar"
-  | "frequency"
-  | "vigenere"
-  | "enigma"
-  | "bombe"
-  | "public-private-key"
-  | "tls"
-  | "e2e"
-  | "post-quantum";
-
 const orderBySlug = Object.fromEntries(exhibits.map((exhibit) => [exhibit.slug, exhibit.order]));
 
 const artifactsHeroImage = "/images/companions/artifacts-hero.png";
-
-function visualForArtifact(title: string): VisualKey | null {
-  const normalized = title.toLowerCase();
-
-  if (normalized.includes("scytale")) return "scytale";
-  if (normalized.includes("caesar") || normalized.includes("wheel")) return "caesar";
-  if (normalized.includes("frequency")) return "frequency";
-  if (normalized.includes("vigen") || normalized.includes("tabula") || normalized.includes("kasiski")) {
-    return "vigenere";
-  }
-  if (normalized.includes("enigma") || normalized.includes("rotor")) return "enigma";
-  if (normalized.includes("bombe")) return "bombe";
-  if (normalized.includes("public") || normalized.includes("private") || normalized.includes("rsa")) {
-    return "public-private-key";
-  }
-  if (
-    normalized.includes("tls") ||
-    normalized.includes("handshake") ||
-    normalized.includes("https") ||
-    normalized.includes("lock")
-  ) {
-    return "tls";
-  }
-  if (normalized.includes("end-to-end") || normalized.includes("e2e") || normalized.includes("pgp")) {
-    return "e2e";
-  }
-
-  return null;
-}
 
 function shortDescription(text: string) {
   const sentence = text.split(". ")[0]?.trim();
@@ -90,7 +49,7 @@ export default function ArtifactsPage() {
             imagePath={artifactsHeroImage}
             imageAlt="Companion gallery hero image for artifacts"
             title="Artifact Gallery"
-            caption="Objects and diagrams arranged by room, from early devices to modern protocols."
+            caption="Key objects and mechanisms, arranged by room from antiquity through modern trust systems."
             imageMinHeight={260}
           />
         </div>
@@ -98,11 +57,10 @@ export default function ArtifactsPage() {
 
       <div className="museum-container" style={{ borderTop: "1px solid var(--color-rule)" }} />
 
-      <section className="museum-container py-14 md:py-18">
+      <section className="museum-container py-14 md:py-20">
         <div className="grid gap-px sm:grid-cols-2 lg:grid-cols-3">
           {sortedArtifacts.map((artifact) => {
             const roomOrder = String(orderBySlug[artifact.exhibitSlug] ?? 0).padStart(2, "0");
-            const artifactVisualKey = visualForArtifact(artifact.title);
 
             return (
               <div key={artifact.title}>
@@ -115,7 +73,6 @@ export default function ArtifactsPage() {
                   description={shortDescription(artifact.description)}
                   status={artifact.status}
                   compact
-                  visual={artifactVisualKey ? <ExhibitVisual visualKey={artifactVisualKey} /> : undefined}
                 />
               </div>
             );

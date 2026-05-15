@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { exhibits } from "@/lib/museum-data";
 import ExhibitCard from "@/components/ExhibitCard";
-import ExhibitVisual from "@/components/visuals/ExhibitVisual";
 
 export const metadata: Metadata = {
   title: "Exhibits — Hidden in Plain Sight",
@@ -18,21 +17,13 @@ const hookBySlug: Record<string, string> = {
   "invisible-shield": "How cryptography became daily digital infrastructure.",
 };
 
-const tileVisualBySlug = {
-  "secret-writing": "scytale",
-  "states-and-power": "vigenere",
-  "machines-of-secrecy": "bombe",
-  "mathematical-turn": "public-private-key",
-  "invisible-shield": "tls",
-} as const;
-
 export default function ExhibitsPage() {
   return (
     <>
       <section className="museum-container pt-20 pb-12 md:pt-28 md:pb-14">
         <div className="max-w-2xl">
           <p
-            className="text-[0.6rem] tracking-widest uppercase mb-5"
+            className="text-[0.66rem] tracking-widest uppercase mb-5"
             style={{ color: "var(--color-accent)" }}
           >
             Gallery Map
@@ -43,7 +34,7 @@ export default function ExhibitsPage() {
           >
             Five Rooms. One Guided Story.
           </h1>
-          <p className="text-base" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
             Enter in sequence to follow how secrecy evolved from hidden writing to digital trust.
           </p>
         </div>
@@ -51,7 +42,7 @@ export default function ExhibitsPage() {
 
       <div className="museum-container" style={{ borderTop: "1px solid var(--color-rule)" }} />
 
-      <section className="museum-container py-10 md:py-14">
+      <section className="museum-container py-14 md:py-18">
         <div className="grid gap-px sm:grid-cols-2 lg:grid-cols-3">
           {exhibits.map((exhibit) => (
             <ExhibitCard
@@ -61,8 +52,7 @@ export default function ExhibitsPage() {
               subtitle={exhibit.subtitle}
               href={`/exhibits/${exhibit.slug}`}
               hook={hookBySlug[exhibit.slug]}
-              showIntro={false}
-              visual={<ExhibitVisual visualKey={tileVisualBySlug[exhibit.slug as keyof typeof tileVisualBySlug]} />}
+              compact
             />
           ))}
         </div>

@@ -22,6 +22,22 @@ const artifactVisualMap = {
   "invisible-shield": "tls",
 } as const;
 
+const heroCaptionBySlug: Record<string, string> = {
+  "secret-writing": "Early secrecy relied on physical methods and fixed substitution before formal security theory.",
+  "states-and-power": "Cryptanalysis became political leverage as language patterns met state communication.",
+  "machines-of-secrecy": "Industrial ciphers scaled secrecy, and industrial codebreaking scaled the response.",
+  "mathematical-turn": "The field shifted from clever mechanisms to proofs, formal models, and key-distribution breakthroughs.",
+  "invisible-shield": "Modern trust layers run quietly beneath everyday browsing, messaging, and transactions.",
+};
+
+const diagramCaptionBySlug: Record<string, string> = {
+  "secret-writing": "Caesar wheel model showing fixed-shift substitution in Room 01.",
+  "states-and-power": "Frequency distribution model showing why repeated language structure leaks information.",
+  "machines-of-secrecy": "Enigma rotor pathway showing moving substitution states in mechanical encryption.",
+  "mathematical-turn": "Public-key relationship model linking open encryption keys to private decryption keys.",
+  "invisible-shield": "TLS handshake sequence showing identity validation and negotiated session secrecy.",
+};
+
 const hookBySlug: Record<string, string> = {
   "secret-writing": "Secrecy began as physical control, not mathematical certainty.",
   "states-and-power": "Power shifted when language patterns became readable evidence.",
@@ -108,7 +124,7 @@ export default async function ExhibitPage({
             imagePath={heroImageMap[exhibit.slug as keyof typeof heroImageMap]}
             imageAlt={`${roomLabel} exhibit hero image`}
             title={`${roomLabel} Hero`}
-            caption={exhibit.featuredArtifact.visualHint}
+            caption={heroCaptionBySlug[exhibit.slug]}
             imageMinHeight={300}
           />
         </div>
@@ -151,7 +167,15 @@ export default async function ExhibitPage({
             title={exhibit.featuredArtifact.title}
             description={exhibit.featuredArtifact.caption}
             compact
-            visual={artifactVisualKey ? <ExhibitVisual visualKey={artifactVisualKey} /> : undefined}
+            visual={
+              artifactVisualKey ? (
+                <ExhibitVisual
+                  visualKey={artifactVisualKey}
+                  title="Supporting Diagram"
+                  caption={diagramCaptionBySlug[exhibit.slug]}
+                />
+              ) : undefined
+            }
           />
         </div>
       </section>

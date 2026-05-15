@@ -67,7 +67,7 @@ All planning documents were completed and reviewed before implementation began. 
 - [x] The design avoids the items listed in the "What to Avoid" section
 
 **Notes:**
-The design system was implemented as CSS custom properties in `globals.css`. Lora (serif) is used for museum headings and exhibit titles; Geist Sans for UI. Color palette centers on warm parchment (`#f0ead8`) and dark background (`#1a1714`) with amber accent (`#c4973a`). The archival dot-grid texture is CSS-only and intentionally subtle. No neon, no decorative cipher overlays, no hacker aesthetic.
+The design system was implemented as CSS custom properties in `globals.css`. The final build uses system serif/sans/mono stacks for reliability in static export builds. Color palette centers on warm parchment (`#f0ead8`) and dark background (`#1a1714`) with amber accent (`#c4973a`). The archival dot-grid texture is CSS-only and intentionally subtle. No neon, no decorative cipher overlays, no hacker aesthetic.
 
 ---
 
@@ -124,9 +124,10 @@ Routes: / | /exhibits | /exhibits/[slug] (×5) | /timeline | /artifacts | /conce
 - `npm run lint` passes
 - `npm run build` passes
 - All planned routes exist and build (15 static pages)
-- No public `Visual:` production-note text remains on artifact cards
+- Curated local hero image layer is active across homepage, exhibit rooms, and companion page headers
+- No public production-note text remains on artifact cards
 - Public `StatusBadge` output is hidden by default unless explicitly enabled
-- Visuals are local SVG/components (no external image assets)
+- Supporting diagrams are local SVG/components and used selectively (no external image assets)
 - Remaining research gaps are still documented internally in data/docs and are not treated as resolved
 - Final live QA pass and presentation preparation still remain
 

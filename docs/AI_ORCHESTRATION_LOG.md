@@ -101,7 +101,7 @@ Each log entry includes:
 | **Stage** | Design implementation |
 | **Tool Used** | GitHub Copilot (Claude Sonnet) under student direction |
 | **Goal** | Implement the design system from DESIGN_SYSTEM.md as production CSS and layout |
-| **Output** | `src/app/globals.css` replaced with museum design tokens (10 CSS custom properties, archival dot-grid texture, utility classes); `src/app/layout.tsx` with Lora serif font, Geist Sans, metadata, `MuseumNav`, and footer; `src/components/MuseumNav.tsx` with data-driven navigation |
+| **Output** | `src/app/globals.css` replaced with museum design tokens (10 CSS custom properties, archival dot-grid texture, utility classes); `src/app/layout.tsx` with system serif/sans/mono font stacks, metadata, `MuseumNav`, and footer; `src/components/MuseumNav.tsx` with data-driven navigation |
 | **Human Decision** | Accepted the CSS variable approach. The specific values — warm parchment `#f0ead8`, dark background `#1a1714`, amber accent `#c4973a` — were drawn directly from DESIGN_SYSTEM.md. The dot-grid texture was kept subtle enough to be archival, not decorative. |
 | **Revision / Improvement** | No significant changes were needed. The design token approach made it easy to enforce consistency across all subsequent components. |
 
@@ -129,7 +129,7 @@ Each log entry includes:
 | **Goal** | Build the homepage (`/`), exhibits index (`/exhibits`), and five dynamic exhibit pages (`/exhibits/[slug]`) |
 | **Output** | `src/app/page.tsx` (homepage with 5 sections), `src/app/exhibits/page.tsx` (gallery lobby), `src/app/exhibits/[slug]/page.tsx` (5 static exhibit rooms via `generateStaticParams`) |
 | **Human Decision** | The first homepage draft used `onMouseEnter`/`onMouseLeave` on `<Link>` components and failed to build. I required the fix to use Tailwind hover utilities instead. The exhibit detail pages map `FeaturedArtifact.caption` to `ArtifactPanel`'s `description` prop — an explicit adapter decision to avoid changing the component. |
-| **Revision / Improvement** | The server component event handler error was caught immediately by `npm run build`. The fix was clean. Each exhibit page shows `status: "Needs verification"` labels honestly — they are not hidden. |
+| **Revision / Improvement** | The server component event handler error was caught immediately by `npm run build`. The fix was clean. Verification status remains tracked in data/docs while public badge output is suppressed on visitor-facing pages. |
 
 ---
 
@@ -166,6 +166,6 @@ Each log entry includes:
 | **Stage** | Visual polish and content tightening |
 | **Tool Used** | ChatGPT (review and prompt strategy) + GitHub Copilot (Agent mode) for implementation |
 | **Goal** | Make the site more visually engaging and less text-heavy while preserving thesis, route structure, and source discipline |
-| **Output** | Custom SVG visual component system created (`src/components/visuals/`), visuals integrated into homepage/exhibit rooms/companion pages, public-facing copy tightened, public draft badges hidden by default, and public production-note visual text removed from artifact cards |
+| **Output** | Curated local hero image layer added (`public/images/...`), custom SVG visual component system retained for controlled supporting diagrams (`src/components/visuals/`), public-facing copy tightened, public draft badges hidden by default, and artifact-card production-note visual text removed |
 | **Human Decision** | I judged the first deployed version as too wordy and not visually engaging enough, then directed a focused polish sprint with bounded implementation requests |
 | **Revision / Improvement** | The project moved from a structured draft toward a curated digital exhibit: stronger visual rhythm, clearer scanning, and preserved research honesty through internal verification tracking |

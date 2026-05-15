@@ -25,7 +25,7 @@ const workflowSteps = [
   {
     label: "Design system creation",
     description:
-      "I defined palette, typography, spacing, and tone in writing before implementation. The goal was editorial archival seriousness, not hacker or startup aesthetics.",
+      "I defined palette, typography, spacing, and tone in writing before implementation. The final build uses system serif/sans/mono stacks to avoid external font-fetch dependency during static builds.",
   },
   {
     label: "Controlled content writing",
@@ -46,6 +46,11 @@ const workflowSteps = [
     label: "Review and documentation",
     description:
       "Major AI contributions were logged in AI_ORCHESTRATION_LOG.md, and acceptance criteria are tracked in QA_REVIEW_LOG.md.",
+  },
+  {
+    label: "Final visual polish",
+    description:
+      "I added a curated local hero-image layer and reduced repeated SVG diagram use so public pages stay visual, readable, and less cluttered.",
   },
 ];
 
@@ -74,7 +79,7 @@ const assignmentConnections = [
   {
     requirement: "Visual coherence",
     explanation:
-      "The design system is implemented through shared CSS tokens and applied consistently across pages and components.",
+      "The design system is implemented through shared CSS tokens, local hero imagery, and restrained supporting diagrams applied consistently across pages.",
   },
   {
     requirement: "Educational purpose",

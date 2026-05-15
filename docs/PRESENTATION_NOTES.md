@@ -79,7 +79,8 @@ The point is to show that AI use was intentional, traceable, and honest.
 What did not go perfectly, and what would I do differently:
 
 - First version challenge: structurally complete, but too text-heavy for a museum-style visitor flow
-- Improvement made: added custom local SVG diagrams (no external image dependencies) across homepage, exhibit rooms, and companion routes
+- Improvement made: added curated local hero images (no external image dependencies) across homepage, exhibit rooms, and companion routes
+- Improvement made: kept SVG diagrams only as selective supporting visuals instead of repeating them across public listings
 - Improvement made: tightened public copy for scanability while preserving thesis and source-backed claims
 - Improvement made: suppressed public verification labels for polish while keeping verification tracking in internal docs/data
 - What remains: final live QA checklist and presentation run-through

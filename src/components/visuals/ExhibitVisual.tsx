@@ -74,6 +74,19 @@ function renderVisual(key: VisualKey) {
   }
 }
 
+const fallbackCaptionByKey: Record<VisualKey, string> = {
+  scytale: "Scytale transposition model showing message alignment on a matched rod.",
+  caesar: "Caesar shift wheel showing fixed substitution offset across the alphabet.",
+  frequency: "Letter-frequency profile used to infer plaintext structure from cipher text.",
+  vigenere: "Vigenere tabula recta used to apply polyalphabetic substitution by keyword.",
+  enigma: "Rotor permutation pathway showing how Enigma changed substitution each keypress.",
+  bombe: "Bombe search abstraction for testing Enigma key-space constraints at scale.",
+  "public-private-key": "Asymmetric encryption model linking public encryption to private decryption.",
+  tls: "TLS handshake flow establishing verified identity and encrypted session keys.",
+  e2e: "End-to-end message path where only sender and recipient can decrypt content.",
+  "post-quantum": "Post-quantum migration concept for replacing vulnerable classical key systems.",
+};
+
 function resolveLocalAssetPath(path: string) {
   if (!path.startsWith("/")) return path;
   const basePath = process.env.GITHUB_PAGES === "true" ? "/HiddenInPlainSight_MuseumSite" : "";
@@ -154,10 +167,11 @@ export default function ExhibitVisual({
   if (!resolvedKey) return null;
 
   const visual = renderVisual(resolvedKey);
+  const resolvedCaption = caption ?? fallbackCaptionByKey[resolvedKey];
 
   // If no title/caption wrapper requested, return the bare visual
   if (!title && !caption) {
-    return <>{visual}</>;
+    return <span aria-hidden="true">{visual}</span>;
   }
 
   return (
@@ -183,11 +197,12 @@ export default function ExhibitVisual({
       <div
         className="flex items-center justify-center px-4 py-6"
         style={{ minHeight: "160px" }}
+        aria-hidden="true"
       >
         {visual}
       </div>
 
-      {caption && (
+      {resolvedCaption && (
         <figcaption
           className="px-5 py-3 text-[0.7rem] leading-relaxed italic"
           style={{
@@ -195,7 +210,7 @@ export default function ExhibitVisual({
             borderTop: "1px solid var(--color-rule)",
           }}
         >
-          {caption}
+          {resolvedCaption}
         </figcaption>
       )}
     </figure>
