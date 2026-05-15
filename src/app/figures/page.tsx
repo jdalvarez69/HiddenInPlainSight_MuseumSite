@@ -4,6 +4,7 @@ import { figures, exhibits } from "@/lib/museum-data";
 import FigureCard from "@/components/FigureCard";
 import CuratorNote from "@/components/CuratorNote";
 import NextRoomCTA from "@/components/NextRoomCTA";
+import ExhibitVisual from "@/components/visuals/ExhibitVisual";
 
 export const metadata: Metadata = {
   title: "People Behind the Ciphers — Hidden in Plain Sight",
@@ -16,6 +17,14 @@ const figuresByRoom = exhibits.map((exhibit) => ({
   exhibit,
   items: figures.filter((f) => f.exhibitSlug === exhibit.slug),
 }));
+
+const roomVisualMap = {
+  "secret-writing": "caesar",
+  "states-and-power": "vigenere",
+  "machines-of-secrecy": "enigma",
+  "mathematical-turn": "public-private-key",
+  "invisible-shield": "tls",
+} as const;
 
 export default function FiguresPage() {
   return (
@@ -39,12 +48,9 @@ export default function FiguresPage() {
             className="text-lg leading-relaxed"
             style={{ color: "var(--color-text-secondary)", maxWidth: "60ch" }}
           >
-            Cryptography developed through the work of soldiers, scholars,
-            mathematicians, engineers, and public privacy advocates — people
-            operating under very different pressures, across very different
-            centuries, working on the same underlying problem. This page
-            introduces the figures whose contributions appear in the museum
-            route.
+            Cryptography was shaped by soldiers, scholars, mathematicians,
+            engineers, and privacy advocates. This page introduces the figures
+            who appear across the route.
           </p>
         </div>
       </section>
@@ -58,10 +64,8 @@ export default function FiguresPage() {
       {/* ── Curator Note ─────────────────────────────────────────────────── */}
       <section className="museum-container py-10 max-w-2xl">
         <CuratorNote>
-          This page focuses on each person&rsquo;s role in the museum story —
-          not on full biographies. Some figures are well documented; others
-          appear in sources that are themselves still being verified. Status
-          labels reflect that honestly.
+          This page focuses on each person&apos;s role in the museum story, not full
+          biography.
         </CuratorNote>
       </section>
 
@@ -77,34 +81,52 @@ export default function FiguresPage() {
         .map((group) => (
           <section key={group.exhibit.slug} className="museum-container py-12">
             {/* Room label */}
-            <header className="mb-6">
-              <Link
-                href={`/exhibits/${group.exhibit.slug}`}
-                className="group inline-flex items-center gap-2"
-              >
+            <header className="mb-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_250px] lg:items-start">
+              <div>
+                <Link
+                  href={`/exhibits/${group.exhibit.slug}`}
+                  className="group inline-flex items-center gap-2"
+                >
+                  <p
+                    className="text-[0.6rem] tracking-widest uppercase transition-colors group-hover:text-[var(--color-accent)]"
+                    style={{ color: "var(--color-text-dim)" }}
+                  >
+                    Room {String(group.exhibit.order).padStart(2, "0")}
+                  </p>
+                  <span
+                    className="text-[0.6rem] transition-colors group-hover:text-[var(--color-accent)]"
+                    style={{ color: "var(--color-text-dim)" }}
+                    aria-hidden="true"
+                  >
+                    ↗
+                  </span>
+                </Link>
+                <h2
+                  className="mt-1 text-xl leading-snug"
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    color: "var(--color-text)",
+                  }}
+                >
+                  {group.exhibit.title}
+                </h2>
                 <p
-                  className="text-[0.6rem] tracking-widest uppercase transition-colors group-hover:text-[var(--color-accent)]"
-                  style={{ color: "var(--color-text-dim)" }}
+                  className="mt-2 text-sm"
+                  style={{ color: "var(--color-text-secondary)" }}
                 >
-                  Room {String(group.exhibit.order).padStart(2, "0")}
+                  People connected to this phase of the cryptographic story.
                 </p>
-                <span
-                  className="text-[0.6rem] transition-colors group-hover:text-[var(--color-accent)]"
-                  style={{ color: "var(--color-text-dim)" }}
-                  aria-hidden="true"
-                >
-                  ↗
-                </span>
-              </Link>
-              <h2
-                className="mt-1 text-xl leading-snug"
-                style={{
-                  fontFamily: "var(--font-serif)",
-                  color: "var(--color-text)",
-                }}
-              >
-                {group.exhibit.title}
-              </h2>
+              </div>
+
+              <ExhibitVisual
+                visualKey={
+                  roomVisualMap[
+                    group.exhibit.slug as keyof typeof roomVisualMap
+                  ] ?? "caesar"
+                }
+                title="Room Motif"
+                caption="Abstract exhibit motif — no synthetic portraits."
+              />
             </header>
 
             {/* Figure grid */}
@@ -148,9 +170,8 @@ export default function FiguresPage() {
             className="mt-3 text-sm leading-relaxed"
             style={{ color: "var(--color-text-secondary)", maxWidth: "55ch" }}
           >
-            The exhibit rooms provide the full historical context — the problem
-            each person was responding to, the constraints they worked under, and
-            the significance of what they did.
+            Exhibit rooms provide the full context: the problem each person
+            faced and why their contribution mattered.
           </p>
         </header>
 

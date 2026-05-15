@@ -1,9 +1,10 @@
 interface StatusBadgeProps {
   status?: "Verified" | "Needs verification";
+  show?: boolean;
 }
 
-export default function StatusBadge({ status }: StatusBadgeProps) {
-  if (!status) return null;
+export default function StatusBadge({ status, show }: StatusBadgeProps) {
+  if (!status || !show) return null;
 
   if (status === "Verified") {
     return (

@@ -130,27 +130,27 @@ export const exhibits: Exhibit[] = [
     title: "The Birth of Secret Writing",
     subtitle: "When Hiding a Message Was Enough",
     intro:
-      "The need to keep a message secret is older than most of the writing systems we use today. Long before formal cryptography existed — before ciphers and keys and algorithms — people were looking for ways to make sure the wrong eyes never read the right words. Some early methods hid the message itself. Others rearranged or substituted the letters so the meaning was lost without a key. Both approaches were clever. Neither was, in the end, secure.",
+      "The need to hide a message is older than most writing systems. Before formal cryptography, people concealed messages physically or scrambled letters with simple rules. Both methods were clever, but neither was truly secure.",
     keyPoints: [
       {
-        text: "Cryptology has roots in antiquity. The manual cryptography era — in which ciphers were created and broken by hand — stretched from ancient times through World War I. The tools changed over centuries; the underlying struggle between maker and breaker did not.",
+        text: "Cryptology has roots in antiquity. The manual era lasted from ancient times through World War I, with ciphers created and broken by hand.",
         sources: ["Britannica — History of Cryptology"],
       },
       {
-        text: "One of the earliest recorded cipher devices was the scytale, used in ancient Greece. A strip of material was wrapped around a rod of a specific diameter, the message was written across the wrapped surface, and then the strip was unwound and sent. Without a matching rod, the message appeared as a random sequence of letters.",
+        text: "The scytale used a strip wrapped around a rod. When unwound, the message looked random unless the reader had a matching rod diameter.",
         sources: ["NSA — Fun Facts about Cryptology"],
       },
       {
-        text: "The Caesar cipher — associated with Julius Caesar — works by shifting each letter in the alphabet by a fixed number of positions. It is a substitution cipher in its simplest form: every instance of one letter becomes another.",
+        text: "The Caesar cipher shifts each letter by a fixed number of positions, creating a simple substitution rule.",
         sources: ["Britannica — Caesar Cipher"],
       },
       {
-        text: "Simple substitution and transposition ciphers share a fundamental weakness. The structure of a language — which letters appear most often, which combinations are common — survives the transformation. A shifted or rearranged message still carries the fingerprints of the original language.",
+        text: "Simple substitution and transposition keep language fingerprints, including letter frequencies and common patterns.",
         sources: [],
         status: "Needs verification",
       },
       {
-        text: "The appeal of these methods was not security in the modern sense. It was that the intended recipient had the key, and the adversary likely did not. Secrecy depended on the key remaining secret, not on the cipher being unbreakable.",
+        text: "Their strength was practical, not absolute: the intended recipient had the key, and the adversary usually did not.",
         sources: [],
         status: "Needs verification",
       },
@@ -183,27 +183,27 @@ export const exhibits: Exhibit[] = [
     title: "Ciphers, States, and Power",
     subtitle: "When Secrecy Became a Tool of the State",
     intro:
-      "At some point, cryptography stopped being a personal matter and became an instrument of power. Diplomats encoded their dispatches. Governments built cipher bureaus. The ability to send a message that only your intended recipient could read — and to read messages that were not meant for you — became a strategic advantage. But power creates its own vulnerabilities. The same period that produced more sophisticated ciphers also produced the first serious science of breaking them.",
+      "Cryptography shifted from personal secrecy to state power. Diplomats encoded dispatches, governments built cipher bureaus, and cryptanalysis became strategic. Better ciphers and better codebreaking advanced together.",
     keyPoints: [
       {
-        text: "Around 850 CE, a scholar in Baghdad named Al-Kindi wrote what is described as one of the earliest recorded explanations of cryptanalysis — the science of breaking codes. His treatise described how to identify patterns in cipher text by analyzing which letters appeared most frequently.",
+        text: "Around 850 CE, Al-Kindi documented one of the earliest recorded methods of cryptanalysis using letter-frequency patterns.",
         sources: ["History of Information — Al-Kindi"],
       },
       {
-        text: "Al-Kindi's insight, now called frequency analysis, turns the structure of language against the cipher. If the letter E appears most often in English, then the most frequent symbol in a cipher text is probably a stand-in for E. A substitution cipher may change the letters, but it cannot change how often they appear.",
+        text: "Frequency analysis turns language structure against a cipher: symbols change, but letter-frequency patterns remain.",
         sources: ["History of Information — Al-Kindi"],
       },
       {
-        text: "The Vigenère cipher — which uses a repeating keyword to shift different letters by different amounts — resisted frequency analysis for a long time. It was considered extremely difficult to break.",
+        text: "The Vigenere cipher used a repeating keyword and resisted basic frequency analysis for a long time.",
         sources: [],
         status: "Needs verification",
       },
       {
-        text: "Charles Babbage developed a method for breaking the Vigenère cipher around 1846 but did not publish it. Friedrich Kasiski published the first recorded account of the method in 1863. The technique works by finding repeated sequences in the cipher text and using the distances between them to determine the length of the keyword.",
+        text: "Babbage developed an unpublished Vigenere break method; Kasiski published it in 1863 using repeated sequences to infer keyword length.",
         sources: ["Michigan Tech — Kasiski's Method"],
       },
       {
-        text: "The breaking of increasingly complex ciphers followed a recurring pattern: a new method appeared, was believed unbreakable, and eventually yielded to someone who looked carefully enough at the structure it relied on.",
+        text: "A recurring pattern emerged: each 'unbreakable' cipher eventually failed under structural analysis.",
         sources: [],
         status: "Needs verification",
       },
@@ -235,32 +235,32 @@ export const exhibits: Exhibit[] = [
     title: "Machines of Secrecy",
     subtitle: "When Complexity Became the Key",
     intro:
-      "The twentieth century industrialized almost everything, including secrecy. The cipher machines developed in the years around World War I and II were extraordinary pieces of engineering — capable of producing ciphers of staggering complexity. The Germans believed the Enigma machine produced messages that were effectively unbreakable. They were wrong. But breaking it required building machines in return.",
+      "The twentieth century industrialized secrecy. Cipher machines like Enigma produced huge complexity and were believed unbreakable. Breaking them required new machines in return.",
     keyPoints: [
       {
-        text: "The Enigma machine was invented by German engineer Arthur Scherbius shortly after World War I. It used a series of rotating electrical components — rotors — to scramble letters through a different substitution with every keypress, producing cipher text that changed configuration continuously.",
+        text: "Arthur Scherbius's Enigma used rotating rotors to change substitution on every keypress.",
         sources: ["Bletchley Park — Enigma"],
       },
       {
-        text: "The Bombe, developed by Alan Turing, was built to work out Naval Enigma settings that could not be solved by hand. Its task was to determine the Enigma daily key: the wheel order, the wheel settings, and the plugboard configuration that would allow thousands of intercepted messages to be deciphered.",
+        text: "Turing's Bombe determined Naval Enigma daily settings (wheel order, positions, and plugboard) at a scale impossible by hand.",
         sources: [
           "Bletchley Park — Bombe",
           "National Museum of Computing — The Turing-Welchman Bombe",
         ],
       },
       {
-        text: "The British codebreaking operation at Bletchley Park did not begin the work on Enigma. Three Polish mathematicians — Marian Rejewski, Henryk Zygalski, and Jerzy Różycki — had already worked on Enigma before the war. The work done at Bletchley Park was built on the foundation they established in the 1930s.",
+        text: "Bletchley's success built on 1930s Polish work by Rejewski, Zygalski, and Rozycki.",
         sources: [
           "JSTOR Daily — The Polish Connection",
           "ScienceDirect — Rejewski & Enigma",
         ],
       },
       {
-        text: "The Enigma's rotor settings changed daily, which meant the deciphering process had to be repeated for each new day's key. The Bombe systematically tested possible configurations at a speed no team of analysts could match by hand.",
+        text: "Because Enigma settings changed daily, key recovery had to be repeated each day. The Bombe automated that search.",
         sources: ["National Museum of Computing — The Turing-Welchman Bombe"],
       },
       {
-        text: "The lesson of Enigma is not simply that codes can be broken. It is that the same properties that make a system mechanically complex — many moving parts, many settings — also make it systematically analyzable. Complexity is not a substitute for mathematical security.",
+        text: "Enigma showed that mechanical complexity is not the same as mathematical security.",
         sources: [],
         status: "Needs verification",
       },
@@ -295,27 +295,27 @@ export const exhibits: Exhibit[] = [
     title: "The Mathematical Turn",
     subtitle: "When Secrecy Became a Proof",
     intro:
-      "At some point in the mid-twentieth century, cryptography became mathematics. This was not just a change in tools — it was a change in what the question even was. Instead of asking 'how do we make this harder to break?' researchers began asking 'what does it mean for a cipher to be provably secure?' The answers to that question made the modern internet possible.",
+      "In the mid-twentieth century, cryptography became a formal mathematical discipline. The question shifted from 'hard to break' to 'provably secure.' That shift made modern internet security possible.",
     keyPoints: [
       {
-        text: "Claude Shannon's paper on the mathematical theory of secrecy — published around 1949 — reframed cryptography entirely. Shannon defined secrecy systems formally, analyzed their structure, and established the terms under which a cipher could be considered secure. Cryptography was no longer an art of ingenious design. It was a formal discipline with proofs.",
+        text: "Shannon's 1949 secrecy theory formalized cryptography and set mathematical terms for security.",
         sources: ["Shannon — Communication Theory of Secrecy Systems"],
       },
       {
-        text: "One of the central problems cryptography had never fully solved was the key distribution problem: before two parties can communicate securely, they need to share a secret key. For most of history, that meant meeting in person, or trusting a courier. For modern communication at scale, neither was viable.",
+        text: "The key distribution problem persisted: secure communication required sharing a secret in advance, which did not scale.",
         sources: [],
         status: "Needs verification",
       },
       {
-        text: "Diffie and Hellman proposed a solution: a cryptosystem in which the enciphering key and the deciphering key are distinct, and the public enciphering key can be shared openly without compromising the private deciphering key. You could publish your public key to the world. Only you could decrypt messages encoded with it.",
+        text: "Diffie and Hellman proposed distinct public and private keys, allowing secure exchange without a prior shared secret.",
         sources: ["Diffie & Hellman — New Directions in Cryptography"],
       },
       {
-        text: "Rivest, Shamir, and Adleman built on Diffie and Hellman's framework to produce RSA — a practical method for implementing public-key cryptosystems and digital signatures. The security of RSA rests on a mathematical property: it is easy to multiply two large prime numbers together, but computationally hard to factor the result.",
+        text: "Rivest, Shamir, and Adleman developed RSA, a practical public-key and signature system based on hard factorization.",
         sources: ["RSA Paper — Rivest, Shamir, Adleman"],
       },
       {
-        text: "The concept these systems rely on is called a trapdoor function — a mathematical operation that is easy to perform in one direction and very difficult to reverse without specific knowledge. This asymmetry is the foundation of almost all modern encryption.",
+        text: "These systems rely on trapdoor functions: easy to compute one way, hard to reverse without special knowledge.",
         sources: [],
         status: "Needs verification",
       },
@@ -348,26 +348,26 @@ export const exhibits: Exhibit[] = [
     title: "The Invisible Shield of Modern Life",
     subtitle: "The Cryptography You Use Without Knowing It",
     intro:
-      "You probably have not thought much about cryptography today. You have almost certainly used it. Every time a browser connects to a secure website, every encrypted message you send, every online transaction — these are all running on systems that trace their intellectual lineage directly back through the four rooms you have just walked through. The difference is that today, none of it requires you to understand it. It simply works.",
+      "You may not think about cryptography, but you use it constantly. Secure browsing, encrypted messages, and online transactions all rely on ideas from the previous rooms — now automated and mostly invisible.",
     keyPoints: [
       {
-        text: "When your browser connects to a secure website, it performs a TLS handshake: the browser and server open a secure connection, exchange public-key information, and generate session keys that encrypt the communication going forward. This happens in milliseconds.",
+        text: "A TLS handshake lets browser and server exchange key material and establish encrypted session keys in milliseconds.",
         sources: ["Cloudflare — How SSL/TLS Works"],
       },
       {
-        text: "End-to-end encryption takes this further: data is encrypted before it leaves the sender's device, remains encrypted throughout transit, and is only decrypted on the recipient's device. No server in the middle — not even the service provider — holds the key.",
+        text: "End-to-end encryption keeps data encrypted from sender device to recipient device; intermediaries do not hold the key.",
         sources: ["IBM — What is End-to-End Encryption?"],
       },
       {
-        text: "Signal is one example of a service that uses end-to-end encryption: conversations are encrypted so that only the intended recipients can read or hear them.",
+        text: "Signal is an example of end-to-end encryption in everyday communication.",
         sources: ["Signal — Is it private? Can I trust it?"],
       },
       {
-        text: "In 1991, Phil Zimmermann released Pretty Good Privacy (PGP), a tool that made public-key encryption available to individuals — not just governments and corporations. When PGP spread internationally as freeware, it triggered a criminal investigation under U.S. export control laws. The investigation was eventually dropped, but it demonstrated that the politics of cryptography were not resolved by its mathematics.",
+        text: "In 1991, Phil Zimmermann released PGP for individuals. Its global spread triggered a U.S. export-control investigation that was later dropped.",
         sources: ["OpenPGP — History of OpenPGP"],
       },
       {
-        text: "In August 2024, NIST published the first three finalized post-quantum cryptography standards — new encryption methods designed to remain secure against the computational capabilities of future quantum computers. Organizations are advised to begin migrating their systems to quantum-resistant cryptography. The story of cryptography is not over.",
+        text: "In August 2024, NIST finalized three post-quantum standards and advised organizations to begin migration.",
         sources: [
           "NIST — Post-Quantum Cryptography",
           "NIST — Post-Quantum Cryptography Project",

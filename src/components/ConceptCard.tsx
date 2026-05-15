@@ -45,7 +45,7 @@ export default function ConceptCard({
 
       {/* Plain-language explanation */}
       <p
-        className="text-sm leading-relaxed"
+        className="text-sm leading-relaxed line-clamp-5"
         style={{ color: "var(--color-text-secondary)" }}
       >
         {plainLanguageExplanation}

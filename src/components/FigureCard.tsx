@@ -45,7 +45,7 @@ export default function FigureCard({
 
       {/* Description */}
       <p
-        className="text-sm leading-relaxed"
+        className="text-sm leading-relaxed line-clamp-4"
         style={{ color: "var(--color-text-secondary)" }}
       >
         {description}

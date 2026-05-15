@@ -7,6 +7,15 @@ import CuratorNote from "@/components/CuratorNote";
 import EvidencePanel from "@/components/EvidencePanel";
 import NextRoomCTA from "@/components/NextRoomCTA";
 import StatusBadge from "@/components/StatusBadge";
+import ExhibitVisual from "@/components/visuals/ExhibitVisual";
+
+const exhibitVisualKeyMap = {
+  "secret-writing": "scytale",
+  "states-and-power": "frequency",
+  "machines-of-secrecy": "enigma",
+  "mathematical-turn": "public-private-key",
+  "invisible-shield": "tls",
+} as const;
 
 // ─── Static generation ────────────────────────────────────────────────────────
 
@@ -43,6 +52,10 @@ export default async function ExhibitPage({
 
   const nextExhibit = exhibits.find((e) => e.order === exhibit.order + 1);
   const roomLabel = `Room ${String(exhibit.order).padStart(2, "0")}`;
+  const visualKey =
+    exhibitVisualKeyMap[
+      exhibit.slug as keyof typeof exhibitVisualKeyMap
+    ] ?? "scytale";
 
   return (
     <>
@@ -59,37 +72,65 @@ export default async function ExhibitPage({
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="museum-container pt-8 pb-12 md:pb-16">
-        <div className="max-w-2xl">
-          <p
-            className="text-[0.6rem] tracking-widest uppercase mb-4"
-            style={{ color: "var(--color-accent)" }}
-          >
-            {roomLabel}
-          </p>
-          <h1
-            className="mb-3"
-            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
-          >
-            {exhibit.title}
-          </h1>
-          <p
-            className="text-base tracking-wide uppercase mb-6"
-            style={{
-              color: "var(--color-text-secondary)",
-              fontFamily: "var(--font-serif)",
-              fontSize: "0.8rem",
-              letterSpacing: "0.12em",
-            }}
-          >
-            {exhibit.subtitle}
-          </p>
-          <p
-            className="text-lg leading-relaxed"
-            style={{ color: "var(--color-text-secondary)", maxWidth: "65ch" }}
-          >
-            {exhibit.intro}
-          </p>
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(300px,360px)] lg:items-start">
+          <div className="max-w-2xl">
+            <p
+              className="text-[0.6rem] tracking-widest uppercase mb-4"
+              style={{ color: "var(--color-accent)" }}
+            >
+              {roomLabel}
+            </p>
+            <h1
+              className="mb-3"
+              style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+            >
+              {exhibit.title}
+            </h1>
+            <p
+              className="text-base tracking-wide uppercase"
+              style={{
+                color: "var(--color-text-secondary)",
+                fontFamily: "var(--font-serif)",
+                fontSize: "0.8rem",
+                letterSpacing: "0.12em",
+              }}
+            >
+              {exhibit.subtitle}
+            </p>
+          </div>
+
+          <div aria-label={`${exhibit.title} exhibit visual`}>
+            <ExhibitVisual
+              visualKey={visualKey}
+              title={`${roomLabel} Visual`}
+              caption={exhibit.featuredArtifact.visualHint}
+            />
+          </div>
         </div>
+      </section>
+
+      {/* ── Rule ─────────────────────────────────────────────────────────── */}
+      <div
+        className="museum-container"
+        style={{ borderTop: "1px solid var(--color-rule)" }}
+      />
+
+      {/* ── Introduction ─────────────────────────────────────────────────── */}
+      <section className="museum-container py-10 max-w-3xl">
+        <header className="mb-4">
+          <p
+            className="text-[0.6rem] tracking-widest uppercase"
+            style={{ color: "var(--color-text-dim)" }}
+          >
+            Room Introduction
+          </p>
+        </header>
+        <p
+          className="text-lg leading-relaxed"
+          style={{ color: "var(--color-text-secondary)", maxWidth: "65ch" }}
+        >
+          {exhibit.intro}
+        </p>
       </section>
 
       {/* ── Rule ─────────────────────────────────────────────────────────── */}

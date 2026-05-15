@@ -28,9 +28,9 @@
 
 /* Register fonts for Tailwind font-* utilities */
 @theme inline {
-  --font-sans:  var(--font-geist-sans), system-ui, sans-serif;
-  --font-mono:  var(--font-geist-mono), monospace;
-  --font-serif: var(--font-lora), Georgia, "Times New Roman", serif;
+  --font-sans: Arial, Helvetica, system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-serif: Georgia, "Times New Roman", Times, serif;
 }
 
 /* ── Base ──────────────────────────────────────────────────────────────────── */

@@ -3,6 +3,15 @@ import { siteMeta, exhibits, artifacts } from "@/lib/museum-data";
 import ExhibitCard from "@/components/ExhibitCard";
 import ArtifactPanel from "@/components/ArtifactPanel";
 import CuratorNote from "@/components/CuratorNote";
+import ExhibitVisual from "@/components/visuals/ExhibitVisual";
+
+const exhibitVisualKeyMap = {
+  "secret-writing": "scytale",
+  "states-and-power": "frequency",
+  "machines-of-secrecy": "enigma",
+  "mathematical-turn": "public-private-key",
+  "invisible-shield": "tls",
+} as const;
 
 // Three artifacts chosen to represent the arc of the story:
 // ancient/manual, machine-era, modern/digital
@@ -17,48 +26,58 @@ export default function Home() {
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="museum-container pt-24 pb-20 md:pt-36 md:pb-28">
-        <div className="max-w-2xl">
-          <p
-            className="text-[0.6rem] tracking-widest uppercase mb-6"
-            style={{ color: "var(--color-accent)" }}
-          >
-            A Guided Digital Exhibit
-          </p>
-
-          <h1
-            className="mb-4"
-            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
-          >
-            {siteMeta.title}
-          </h1>
-
-          <p
-            className="text-base tracking-wider uppercase mb-8"
-            style={{ color: "var(--color-text-dim)" }}
-          >
-            {siteMeta.subtitle}
-          </p>
-
-          <p
-            className="text-lg leading-relaxed mb-12"
-            style={{ color: "var(--color-text-secondary)", maxWidth: "62ch" }}
-          >
-            {siteMeta.thesis}
-          </p>
-
-          <div className="flex flex-wrap gap-4">
-            <Link
-              href="/exhibits"
-              className="inline-block px-8 py-3 text-[0.7rem] tracking-widest uppercase transition-colors border border-[#c4973a] text-[#c4973a] hover:bg-[#c4973a] hover:text-[#1a1714]"
+        <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(300px,380px)] md:items-start">
+          <div className="max-w-2xl">
+            <p
+              className="text-[0.6rem] tracking-widest uppercase mb-5"
+              style={{ color: "var(--color-accent)" }}
             >
-              Enter the Museum
-            </Link>
-            <Link
-              href="/process"
-              className="inline-block px-8 py-3 text-[0.7rem] tracking-widest uppercase transition-colors border border-[#2e2b26] text-[#9b9388] hover:border-[#9b9388] hover:text-[#f0ead8]"
+              A Guided Digital Exhibit
+            </p>
+
+            <h1
+              className="mb-4"
+              style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
             >
-              About This Project
-            </Link>
+              {siteMeta.title}
+            </h1>
+
+            <p
+              className="text-base tracking-wider uppercase mb-7"
+              style={{ color: "var(--color-text-dim)" }}
+            >
+              {siteMeta.subtitle}
+            </p>
+
+            <p
+              className="text-lg leading-relaxed mb-10"
+              style={{ color: "var(--color-text-secondary)", maxWidth: "62ch" }}
+            >
+              {siteMeta.thesis}
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/exhibits"
+                className="inline-block px-8 py-3 text-[0.7rem] tracking-widest uppercase transition-colors border border-[#c4973a] text-[#c4973a] hover:bg-[#c4973a] hover:text-[#1a1714]"
+              >
+                Enter the Museum
+              </Link>
+              <Link
+                href="/process"
+                className="inline-block px-8 py-3 text-[0.7rem] tracking-widest uppercase transition-colors border border-[#2e2b26] text-[#9b9388] hover:border-[#9b9388] hover:text-[#f0ead8]"
+              >
+                About This Project
+              </Link>
+            </div>
+          </div>
+
+          <div className="w-full md:pt-2" aria-label="Museum entrance visual">
+            <ExhibitVisual
+              visualKey="caesar"
+              title="Entrance Diagram"
+              caption="A substitution wheel from the earliest room: secrecy by controlled letter shift."
+            />
           </div>
         </div>
       </section>
@@ -73,16 +92,13 @@ export default function Home() {
       <section className="museum-container py-12 max-w-2xl">
         <CuratorNote>
           <p>
-            This museum follows cryptography from the first attempts at
-            concealment in antiquity through the cipher machines of the
-            twentieth century, and on to the mathematical foundations that
-            make modern digital trust possible. Five rooms. One continuous
-            story.
+            This museum follows cryptography from ancient concealment to the
+            mathematics behind modern digital trust. Five rooms. One
+            continuous story.
           </p>
           <p className="mt-3">
-            All historical content is drawn from verified sources. Anything
-            that still needs confirmation is clearly marked. Nothing here has
-            been invented.
+            Historical claims are source-traced. Anything pending confirmation
+            is marked. Nothing here is invented.
           </p>
         </CuratorNote>
       </section>
@@ -112,6 +128,16 @@ export default function Home() {
               title={exhibit.title}
               subtitle={exhibit.subtitle}
               intro={exhibit.intro}
+              visual={
+                <ExhibitVisual
+                  visualKey={
+                    exhibitVisualKeyMap[
+                      exhibit.slug as keyof typeof exhibitVisualKeyMap
+                    ] ?? "scytale"
+                  }
+                />
+              }
+              showIntro={false}
               href={`/exhibits/${exhibit.slug}`}
             />
           ))}
@@ -143,8 +169,8 @@ export default function Home() {
             className="mt-2 text-sm"
             style={{ color: "var(--color-text-secondary)", maxWidth: "56ch" }}
           >
-            Each artifact marks a specific moment in the history of how people
-            protected — or broke — a secret.
+            Each object marks a turning point in how people protected or broke
+            secrets.
           </p>
         </header>
 
@@ -197,8 +223,8 @@ export default function Home() {
             className="text-base leading-relaxed mb-10"
             style={{ color: "var(--color-text-secondary)", maxWidth: "52ch" }}
           >
-            Follow the guided route from the first secret messages to the
-            mathematics that protects every secure connection you make today.
+            Follow the route from early secret writing to the encryption behind
+            secure connections today.
           </p>
           <Link
             href="/exhibits"

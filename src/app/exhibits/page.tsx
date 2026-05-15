@@ -17,31 +17,31 @@ const routeLogic = [
     order: 1,
     slug: "secret-writing",
     label: "Room 01",
-    point: "Secret writing begins with physical ingenuity — messages hidden in wax, letters shifted by a fixed number of positions. Secrecy is relational, not mathematical.",
+    point: "Secrecy starts as physical ingenuity: hidden messages and fixed letter shifts, before formal security theory.",
   },
   {
     order: 2,
     slug: "states-and-power",
     label: "Room 02",
-    point: "Ciphers become instruments of statecraft. Diplomats encode dispatches. And a scholar in Baghdad discovers that language itself betrays the message.",
+    point: "Ciphers become state tools, and cryptanalysis emerges when language patterns start betraying the code.",
   },
   {
     order: 3,
     slug: "machines-of-secrecy",
     label: "Room 03",
-    point: "The twentieth century industrializes secrecy. Cipher machines produce complexity at scale — but complexity turns out to have its own vulnerabilities.",
+    point: "Machine-era secrecy scales fast, but machine complexity also creates new paths for systematic codebreaking.",
   },
   {
     order: 4,
     slug: "mathematical-turn",
     label: "Room 04",
-    point: "Cryptography becomes a formal discipline. Shannon defines it mathematically. Diffie and Hellman solve the key distribution problem that had existed since the beginning.",
+    point: "Cryptography becomes mathematical, and public-key ideas solve the long-standing key distribution problem.",
   },
   {
     order: 5,
     slug: "invisible-shield",
     label: "Room 05",
-    point: "The mathematics becomes infrastructure. Every secure connection you make today runs on systems descended directly from the previous four rooms.",
+    point: "Those ideas become infrastructure: modern secure connections inherit directly from the previous rooms.",
   },
 ];
 
@@ -67,10 +67,8 @@ export default function ExhibitsPage() {
             className="text-lg leading-relaxed"
             style={{ color: "var(--color-text-secondary)", maxWidth: "60ch" }}
           >
-            This museum is organized as a single guided path through the history
-            of cryptography — from the first attempts to hide a message in
-            antiquity to the invisible encryption protecting every secure
-            connection in the digital present.
+            This museum is a single guided path from ancient secret writing to
+            the encryption that secures modern digital life.
           </p>
         </div>
       </section>
@@ -85,15 +83,12 @@ export default function ExhibitsPage() {
       <section className="museum-container py-10 max-w-2xl">
         <CuratorNote>
           <p>
-            The route is intentionally ordered. Each room builds on the one
-            before it — the weakness discovered in Room 2 is exactly what
-            forced the innovation described in Room 3. Visitors who follow the
-            path from beginning to end will arrive at the present with a much
-            clearer sense of how we got here.
+            The route is intentionally ordered. Each room answers a weakness the
+            previous room exposed.
           </p>
           <p className="mt-3">
-            If you prefer to explore by topic, the Timeline, Artifacts,
-            Concepts, and Figures pages are available at any point.
+            Prefer topic-based browsing? Timeline, Artifacts, Concepts, and
+            Figures are available at any point.
           </p>
         </CuratorNote>
       </section>
@@ -116,6 +111,7 @@ export default function ExhibitsPage() {
               title={exhibit.title}
               subtitle={exhibit.subtitle}
               intro={exhibit.intro}
+              showIntro={false}
               href={`/exhibits/${exhibit.slug}`}
             />
           ))}

@@ -15,37 +15,37 @@ const workflowSteps = [
   {
     label: "Topic and concept planning",
     description:
-      "I defined the project topic, thesis, audience, exhibit structure, design style, and archetype before writing a single line of code. The planning documents set clear constraints so that AI assistance later could not drift from the direction I had established.",
+      "I defined topic, thesis, audience, exhibit structure, and design direction before writing code. Planning documents set clear boundaries for later AI work.",
   },
   {
     label: "Research organization",
     description:
-      "I organized the research direction and source list before writing any exhibit content. Sources were assigned to exhibits. Claims without supporting sources were flagged [VERIFY] and excluded from production content.",
+      "I organized sources before writing exhibit content. Claims without support were tagged [VERIFY] and kept out of production copy.",
   },
   {
     label: "Design system creation",
     description:
-      "I defined the visual language — color palette, typography, spacing, and tone — as a written specification before implementation. The design avoids common aesthetic mistakes (neon hacker look, startup landing page energy) and aims for editorial archival seriousness.",
+      "I defined palette, typography, spacing, and tone in writing before implementation. The goal was editorial archival seriousness, not hacker or startup aesthetics.",
   },
   {
     label: "Controlled content writing",
     description:
-      "Site copy was written into a single source-of-truth document (SITE_COPY.md) before any page was built. Nothing was allowed into the code that was not already in that document and traceable to a source.",
+      "Site copy was drafted in a single source-of-truth document (SITE_COPY.md) before pages were built. Content in code had to be source-traceable.",
   },
   {
     label: "Structured AI implementation",
     description:
-      "Each build step was scoped in a single request. I told the AI exactly which files to create, which data to use, what design rules to follow, and what not to do. The AI did not make structural decisions — it executed bounded tasks.",
+      "Each build step was scoped in a single request with explicit file, data, and design constraints. AI executed bounded tasks; it did not choose structure.",
   },
   {
     label: "Lint and build testing",
     description:
-      "Every implementation step ended with npm run lint and npm run build. Problems were fixed before moving to the next step. The build has been clean at every stage.",
+      "Every step ended with npm run lint and npm run build. Failures were fixed before advancing.",
   },
   {
     label: "Review and documentation",
     description:
-      "Significant AI contributions were logged in AI_ORCHESTRATION_LOG.md. Acceptance criteria are tracked in QA_REVIEW_LOG.md. The Process page itself is part of that documentation.",
+      "Major AI contributions were logged in AI_ORCHESTRATION_LOG.md, and acceptance criteria are tracked in QA_REVIEW_LOG.md.",
   },
 ];
 
@@ -54,32 +54,32 @@ const assignmentConnections = [
   {
     requirement: "Research",
     explanation:
-      "The research was organized before any content was written. Sources are documented in RESEARCH_NOTES.md and traced to every claim in the data file. Items without confirmed sources are explicitly marked.",
+      "Research was organized before writing. Sources are documented in RESEARCH_NOTES.md and traced to claims in the data file.",
   },
   {
     requirement: "Planning",
     explanation:
-      "Six planning documents were completed before implementation began: project brief, content model, design system, AI log, QA log, and presentation notes. The five-exhibit structure was defined and locked before any code was written.",
+      "Six planning documents were completed before implementation. The five-exhibit structure was set before coding.",
   },
   {
     requirement: "Design judgment",
     explanation:
-      "The visual direction — editorial archival modernism, warm parchment tones, serif typography, dot-grid texture, no decorative code imagery — was a deliberate choice, not a default theme. I defined what to avoid as clearly as what to do.",
+      "Editorial archival modernism was chosen deliberately: warm parchment tones, serif hierarchy, restrained texture, and no decorative code aesthetics.",
   },
   {
     requirement: "AI orchestration",
     explanation:
-      "AI was used at every build stage, but each task was scoped, bounded, and reviewed. The AI did not select the topic, define the thesis, choose the design, write free-form content, or decide what to include. It executed specific, described tasks.",
+      "AI was used throughout, but each task was scoped and reviewed. It did not choose topic, thesis, design direction, or final content decisions.",
   },
   {
     requirement: "Visual coherence",
     explanation:
-      "The design system was implemented as CSS custom properties and used consistently across every page and component. No page diverges from the established color, type, or spacing rules.",
+      "The design system is implemented through shared CSS tokens and applied consistently across pages and components.",
   },
   {
     requirement: "Educational purpose",
     explanation:
-      "The site is organized as a linear guided route that takes a visitor with no prior knowledge through the history of cryptography and delivers a real understanding of how the field developed. The companion pages support, not replace, the exhibit route.",
+      "The site uses a linear guided route for visitors with no prior background. Companion pages support that route rather than replacing it.",
   },
 ];
 
@@ -106,9 +106,8 @@ export default function ProcessPage() {
             style={{ color: "var(--color-text-secondary)", maxWidth: "60ch" }}
           >
             This site was not made from one giant prompt. It was built through
-            staged planning, organized research, a written design system,
-            controlled content, and bounded implementation tasks — each step
-            reviewed before the next one began.
+            staged planning, organized research, written design rules, and
+            bounded implementation tasks.
           </p>
         </div>
       </section>
@@ -123,16 +122,13 @@ export default function ProcessPage() {
       <section className="museum-container py-10 max-w-2xl">
         <CuratorNote label="Student's Note">
           <p>
-            I used AI as a structured assistant throughout this project. It
-            helped me plan more clearly, scaffold technical setup, write
-            TypeScript components, and catch errors. But the project direction,
-            the thesis, the design decisions, and the final judgment on what
-            content to include were mine.
+            I used AI as a structured assistant for planning, setup,
+            implementation, and error checks. Project direction, thesis, design,
+            and final content decisions were mine.
           </p>
           <p className="mt-3">
-            Every significant AI interaction was logged before the next step
-            began. The goal was to be able to explain, at any point, exactly
-            what the AI did and what I decided about it.
+            Significant AI interactions were logged as the work progressed so I
+            could explain what the AI did and what I decided.
           </p>
         </CuratorNote>
       </section>
@@ -349,10 +345,9 @@ export default function ProcessPage() {
       <section className="museum-container py-10 max-w-2xl">
         <CuratorNote label="Final Note">
           <p>
-            The AI log, QA checklist, design system, content model, and process
-            page together form a record of how the project was made. The museum
-            content was the goal. This documentation is the evidence that the
-            process was intentional.
+            The AI log, QA checklist, design system, and process page document
+            how this project was made. The museum content was the goal; this
+            documentation shows the process was intentional.
           </p>
         </CuratorNote>
       </section>

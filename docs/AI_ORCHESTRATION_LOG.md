@@ -161,13 +161,11 @@ Each log entry includes:
 
 #### Entry 011 — Final Polish and Presentation Prep
 
-_(To be completed before submission)_
-
 | Field | Notes |
 |---|---|
-| **Stage** | Finalization |
-| **Tool Used** | |
-| **Goal** | |
-| **Output** | |
-| **Human Decision** | |
-| **Revision / Improvement** | |
+| **Stage** | Visual polish and content tightening |
+| **Tool Used** | ChatGPT (review and prompt strategy) + GitHub Copilot (Agent mode) for implementation |
+| **Goal** | Make the site more visually engaging and less text-heavy while preserving thesis, route structure, and source discipline |
+| **Output** | Custom SVG visual component system created (`src/components/visuals/`), visuals integrated into homepage/exhibit rooms/companion pages, public-facing copy tightened, public draft badges hidden by default, and public production-note visual text removed from artifact cards |
+| **Human Decision** | I judged the first deployed version as too wordy and not visually engaging enough, then directed a focused polish sprint with bounded implementation requests |
+| **Revision / Improvement** | The project moved from a structured draft toward a curated digital exhibit: stronger visual rhythm, clearer scanning, and preserved research honesty through internal verification tracking |

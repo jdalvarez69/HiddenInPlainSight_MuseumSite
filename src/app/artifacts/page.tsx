@@ -4,6 +4,7 @@ import { artifacts, exhibits } from "@/lib/museum-data";
 import ArtifactPanel from "@/components/ArtifactPanel";
 import CuratorNote from "@/components/CuratorNote";
 import NextRoomCTA from "@/components/NextRoomCTA";
+import ExhibitVisual from "@/components/visuals/ExhibitVisual";
 
 export const metadata: Metadata = {
   title: "Artifacts — Hidden in Plain Sight",
@@ -16,6 +17,62 @@ const artifactsByRoom = exhibits.map((exhibit) => ({
   exhibit,
   items: artifacts.filter((a) => a.exhibitSlug === exhibit.slug),
 }));
+
+type VisualKey =
+  | "scytale"
+  | "caesar"
+  | "frequency"
+  | "vigenere"
+  | "enigma"
+  | "bombe"
+  | "public-private-key"
+  | "tls"
+  | "e2e"
+  | "post-quantum";
+
+const roomVisualMap: Record<string, VisualKey> = {
+  "secret-writing": "scytale",
+  "states-and-power": "frequency",
+  "machines-of-secrecy": "enigma",
+  "mathematical-turn": "public-private-key",
+  "invisible-shield": "tls",
+};
+
+function getArtifactVisualKey(title: string, exhibitSlug: string): VisualKey {
+  const normalized = title.toLowerCase();
+
+  if (normalized.includes("scytale")) return "scytale";
+  if (normalized.includes("caesar") || normalized.includes("wheel")) return "caesar";
+  if (normalized.includes("frequency")) return "frequency";
+  if (
+    normalized.includes("vigen") ||
+    normalized.includes("tabula") ||
+    normalized.includes("square")
+  ) {
+    return "vigenere";
+  }
+  if (normalized.includes("enigma") || normalized.includes("rotor")) return "enigma";
+  if (normalized.includes("bombe")) return "bombe";
+  if (
+    normalized.includes("public") ||
+    normalized.includes("private") ||
+    normalized.includes("rsa") ||
+    normalized.includes("diffie")
+  ) {
+    return "public-private-key";
+  }
+  if (normalized.includes("tls") || normalized.includes("handshake") || normalized.includes("https")) {
+    return "tls";
+  }
+  if (normalized.includes("end-to-end") || normalized.includes("e2e") || normalized.includes("pgp")) {
+    return "e2e";
+  }
+  if (normalized.includes("post-quantum") || normalized.includes("lattice") || normalized.includes("nist")) {
+    return "post-quantum";
+  }
+
+  return roomVisualMap[exhibitSlug] ?? "scytale";
+}
 
 export default function ArtifactsPage() {
   return (
@@ -39,11 +96,8 @@ export default function ArtifactsPage() {
             className="text-lg leading-relaxed"
             style={{ color: "var(--color-text-secondary)", maxWidth: "60ch" }}
           >
-            Cryptography can feel abstract. This page collects the objects,
-            diagrams, machines, and symbols that represent each stage of the
-            story — the things you might find in museum display cases, the
-            annotated drawings that make a concept visible. Each artifact is
-            tied to one of the five exhibit rooms.
+            Cryptography can feel abstract. This gallery gathers the objects,
+            diagrams, and machines that make each room concrete.
           </p>
         </div>
       </section>
@@ -57,12 +111,8 @@ export default function ArtifactsPage() {
       {/* ── Curator Note ─────────────────────────────────────────────────── */}
       <section className="museum-container py-10 max-w-2xl">
         <CuratorNote>
-          Artifacts are not decorations. Each object or diagram in this gallery
-          represents the way secrecy was actually practiced at a particular
-          moment in history — what it looked like, what it required, and what it
-          could not hide. The rods, the wheels, the rotor diagrams, and the
-          sequence charts are all records of the same underlying problem being
-          worked on across different centuries.
+          Artifacts are not decoration. Each one shows how secrecy was actually
+          practiced in its era.
         </CuratorNote>
       </section>
 
@@ -78,35 +128,61 @@ export default function ArtifactsPage() {
         .map((group) => (
           <section key={group.exhibit.slug} className="museum-container py-12">
             {/* Room label */}
-            <header className="mb-6">
-              <Link
-                href={`/exhibits/${group.exhibit.slug}`}
-                className="group inline-flex items-center gap-2"
-              >
+            <header className="mb-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-start">
+              <div>
+                <Link
+                  href={`/exhibits/${group.exhibit.slug}`}
+                  className="group inline-flex items-center gap-2"
+                >
+                  <p
+                    className="text-[0.6rem] tracking-widest uppercase transition-colors group-hover:text-[var(--color-accent)]"
+                    style={{ color: "var(--color-text-dim)" }}
+                  >
+                    Room {String(group.exhibit.order).padStart(2, "0")}
+                  </p>
+                  <span
+                    className="text-[0.6rem] tracking-widest uppercase transition-colors group-hover:text-[var(--color-accent)]"
+                    style={{ color: "var(--color-text-dim)" }}
+                    aria-hidden="true"
+                  >
+                    ↗
+                  </span>
+                </Link>
+                <h2
+                  className="mt-1 text-xl leading-snug"
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    color: "var(--color-text)",
+                  }}
+                >
+                  {group.exhibit.title}
+                </h2>
                 <p
-                  className="text-[0.6rem] tracking-widest uppercase transition-colors group-hover:text-[var(--color-accent)]"
-                  style={{ color: "var(--color-text-dim)" }}
+                  className="mt-2 text-sm"
+                  style={{ color: "var(--color-text-secondary)" }}
                 >
-                  Room {String(group.exhibit.order).padStart(2, "0")}
+                  {group.items.length} artifact{group.items.length === 1 ? "" : "s"} from this room.
                 </p>
-                <span
-                  className="text-[0.6rem] tracking-widest uppercase transition-colors group-hover:text-[var(--color-accent)]"
-                  style={{ color: "var(--color-text-dim)" }}
-                  aria-hidden="true"
-                >
-                  ↗
-                </span>
-              </Link>
-              <h2
-                className="mt-1 text-xl leading-snug"
-                style={{
-                  fontFamily: "var(--font-serif)",
-                  color: "var(--color-text)",
-                }}
-              >
-                {group.exhibit.title}
-              </h2>
+              </div>
+
+              <ExhibitVisual
+                visualKey={roomVisualMap[group.exhibit.slug] ?? "scytale"}
+                title={`Room ${String(group.exhibit.order).padStart(2, "0")} Anchor`}
+                caption={group.exhibit.subtitle}
+              />
             </header>
+
+            {/* Visual index strip */}
+            <div className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {group.items.map((artifact) => (
+                <ExhibitVisual
+                  key={`${artifact.title}-visual`}
+                  visualKey={getArtifactVisualKey(artifact.title, artifact.exhibitSlug)}
+                  title={artifact.title}
+                  caption={artifact.era}
+                />
+              ))}
+            </div>
 
             {/* Artifact grid */}
             <div className="grid gap-px sm:grid-cols-2 lg:grid-cols-3">
@@ -150,8 +226,8 @@ export default function ArtifactsPage() {
             className="mt-3 text-sm leading-relaxed"
             style={{ color: "var(--color-text-secondary)", maxWidth: "55ch" }}
           >
-            The guided route provides the full context — the history, the key
-            points, and the argument each artifact is part of.
+            The guided route provides the full historical context and argument
+            for each object.
           </p>
         </header>
 

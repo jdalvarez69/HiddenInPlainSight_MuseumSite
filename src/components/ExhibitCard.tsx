@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 
 interface ExhibitCardProps {
@@ -6,6 +7,8 @@ interface ExhibitCardProps {
   subtitle: string;
   intro: string;
   href: string;
+  visual?: ReactNode;
+  showIntro?: boolean;
 }
 
 export default function ExhibitCard({
@@ -14,6 +17,8 @@ export default function ExhibitCard({
   subtitle,
   intro,
   href,
+  visual,
+  showIntro = true,
 }: ExhibitCardProps) {
   return (
     <Link
@@ -25,6 +30,16 @@ export default function ExhibitCard({
       }}
       aria-label={`Exhibit ${order}: ${title}`}
     >
+      {visual && (
+        <div
+          className="mb-4"
+          style={{ border: "1px solid var(--color-border)" }}
+          aria-hidden="true"
+        >
+          {visual}
+        </div>
+      )}
+
       {/* Room number */}
       <p
         className="text-[0.6rem] tracking-widest uppercase mb-3"
@@ -52,13 +67,14 @@ export default function ExhibitCard({
         {subtitle}
       </p>
 
-      {/* Intro preview */}
-      <p
-        className="text-sm leading-relaxed line-clamp-3"
-        style={{ color: "var(--color-text-secondary)" }}
-      >
-        {intro}
-      </p>
+      {showIntro && (
+        <p
+          className="text-sm leading-relaxed line-clamp-2"
+          style={{ color: "var(--color-text-secondary)" }}
+        >
+          {intro}
+        </p>
+      )}
 
       {/* Enter indicator */}
       <p

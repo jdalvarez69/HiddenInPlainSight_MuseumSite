@@ -87,7 +87,9 @@ The design system was implemented as CSS custom properties in `globals.css`. Lor
 - [ ] All "Needs verification" items have been independently confirmed before final submission
 
 **Notes:**
-Seven key points and one artifact (`Vigenère Square`) carry `status: "Needs verification"` and are displayed honestly with that label — they are not hidden or removed. These items will be reviewed before final submission. No claim was included without at least a named source. The `[VERIFY]` convention prevented content from being fabricated during AI-assisted copy generation.
+Seven key points and one artifact (`Vigenère Square`) carry `status: "Needs verification"` in `museum-data.ts`. These statuses have not been changed or faked — the data remains honest.
+
+**Polish update (Stage 3 — verification badge suppression):** Public-facing "Needs verification" `StatusBadge` labels were suppressed on exhibit, artifact, concept, figure, and timeline pages by adding a `show` prop to `StatusBadge` that defaults to `false`. The status fields remain in the data file and are still accessible internally. This change prevents the exhibit from signaling an unfinished production state to visitors. The Process page continues to disclose that some items are pending confirmation. Remaining verification work still exists and should not be treated as fake completion.
 
 ---
 
@@ -118,11 +120,20 @@ Seven key points and one artifact (`Vigenère Square`) carry `status: "Needs ver
 Routes: / | /exhibits | /exhibits/[slug] (×5) | /timeline | /artifacts | /concepts | /figures | /process
 ```
 
+**Polish QA update (May 2026):**
+- `npm run lint` passes
+- `npm run build` passes
+- All planned routes exist and build (15 static pages)
+- No public `Visual:` production-note text remains on artifact cards
+- Public `StatusBadge` output is hidden by default unless explicitly enabled
+- Visuals are local SVG/components (no external image assets)
+- Remaining research gaps are still documented internally in data/docs and are not treated as resolved
+- Final live QA pass and presentation preparation still remain
+
 **Remaining concerns:**
 - Visual polish review at actual viewport sizes (not yet done)
-- Deployment to Vercel or similar has not been confirmed
-- README has not been written
-- Presentation notes have not been finalized
+- Final browser console check at live URL not yet logged
+- Presentation notes still need final rehearsal polish
 
 ---
 

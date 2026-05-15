@@ -14,7 +14,6 @@ export default function ArtifactPanel({
   title,
   era,
   description,
-  visualHint,
   status,
   sources,
 }: ArtifactPanelProps) {
@@ -50,21 +49,11 @@ export default function ArtifactPanel({
 
       {/* Description */}
       <p
-        className="text-sm leading-relaxed mb-4"
+        className="text-sm leading-relaxed mb-4 line-clamp-4"
         style={{ color: "var(--color-text-secondary)" }}
       >
         {description}
       </p>
-
-      {/* Visual hint — curatorial production note */}
-      {visualHint && (
-        <p
-          className="text-[0.7rem] italic leading-snug"
-          style={{ color: "var(--color-text-dim)" }}
-        >
-          Visual: {visualHint}
-        </p>
-      )}
 
       <EvidencePanel sources={sources ?? []} />
     </article>

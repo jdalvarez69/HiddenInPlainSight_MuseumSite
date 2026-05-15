@@ -4,6 +4,15 @@ import { exhibits, timelineEvents } from "@/lib/museum-data";
 import TimelineRail from "@/components/TimelineRail";
 import CuratorNote from "@/components/CuratorNote";
 import NextRoomCTA from "@/components/NextRoomCTA";
+import ExhibitVisual from "@/components/visuals/ExhibitVisual";
+
+const roomVisualMap = {
+  "secret-writing": "scytale",
+  "states-and-power": "frequency",
+  "machines-of-secrecy": "enigma",
+  "mathematical-turn": "public-private-key",
+  "invisible-shield": "tls",
+} as const;
 
 export const metadata: Metadata = {
   title: "Timeline — Hidden in Plain Sight",
@@ -16,30 +25,33 @@ export default function TimelinePage() {
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="museum-container pt-20 pb-12 md:pt-28 md:pb-16">
-        <div className="max-w-2xl">
-          <p
-            className="text-[0.6rem] tracking-widest uppercase mb-5"
-            style={{ color: "var(--color-accent)" }}
-          >
-            Companion Route
-          </p>
-          <h1
-            className="mb-5"
-            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
-          >
-            Timeline of Secrecy
-          </h1>
-          <p
-            className="text-lg leading-relaxed"
-            style={{ color: "var(--color-text-secondary)", maxWidth: "60ch" }}
-          >
-            Cryptography did not develop in a straight line. Each advance was a
-            response to something — a new way of communicating, a new
-            concentration of power, the mechanization of industry and war, the
-            formalization of mathematics, and finally the migration of everyday
-            life onto digital networks. This timeline traces those responses in
-            order.
-          </p>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
+          <div className="max-w-2xl">
+            <p
+              className="text-[0.6rem] tracking-widest uppercase mb-5"
+              style={{ color: "var(--color-accent)" }}
+            >
+              Companion Route
+            </p>
+            <h1
+              className="mb-5"
+              style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+            >
+              Timeline of Secrecy
+            </h1>
+            <p
+              className="text-lg leading-relaxed"
+              style={{ color: "var(--color-text-secondary)", maxWidth: "60ch" }}
+            >
+              Cryptography did not develop in a straight line; this timeline tracks how each era responded to a new communication risk.
+            </p>
+          </div>
+
+          <ExhibitVisual
+            visualKey="frequency"
+            title="Timeline Motif"
+            caption="Pattern, analysis, and response across eras."
+          />
         </div>
       </section>
 
@@ -52,11 +64,8 @@ export default function TimelinePage() {
       {/* ── Curator Note ─────────────────────────────────────────────────── */}
       <section className="museum-container py-10 max-w-2xl">
         <CuratorNote>
-          This timeline is a companion path, not the main exhibit. The guided
-          route — five rooms, experienced in order — is the primary way to move
-          through the museum. The timeline is here to help visitors place those
-          rooms in historical sequence, and to see, at a glance, how much ground
-          the field has covered.
+          This timeline is a companion path, not the main exhibit. Use it to
+          place the five rooms in historical sequence.
         </CuratorNote>
       </section>
 
@@ -125,6 +134,15 @@ export default function TimelinePage() {
                 >
                   Room {String(exhibit.order).padStart(2, "0")}
                 </p>
+                <div className="hidden sm:block w-16 shrink-0" aria-hidden="true">
+                  <ExhibitVisual
+                    visualKey={
+                      roomVisualMap[
+                        exhibit.slug as keyof typeof roomVisualMap
+                      ] ?? "scytale"
+                    }
+                  />
+                </div>
                 <div className="flex-1">
                   <p
                     className="text-sm leading-snug transition-colors group-hover:text-[var(--color-accent)]"

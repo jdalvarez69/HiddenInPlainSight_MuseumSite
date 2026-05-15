@@ -68,6 +68,7 @@ Talking points:
 - I made the decisions — what to keep, what to revise, what direction to take
 - Specific example: the initial project setup hit a technical error (npm naming restriction), and I worked through the workaround with AI assistance
 - Specific example: the planning documents were generated with AI and then reviewed — I kept the thesis as written, condensed the exhibit route from six to five exhibits
+- Specific example: after the first deployed build, I used AI review to identify two weaknesses — the site was too wordy and visually flat — then I directed a bounded polish sprint
 
 The point is to show that AI use was intentional, traceable, and honest.
 
@@ -77,10 +78,24 @@ The point is to show that AI use was intentional, traceable, and honest.
 
 What did not go perfectly, and what would I do differently:
 
-- _(To be filled in after the project is complete)_
-- Think about: scope decisions, technical challenges, content research, design trade-offs
+- First version challenge: structurally complete, but too text-heavy for a museum-style visitor flow
+- Improvement made: added custom local SVG diagrams (no external image dependencies) across homepage, exhibit rooms, and companion routes
+- Improvement made: tightened public copy for scanability while preserving thesis and source-backed claims
+- Improvement made: suppressed public verification labels for polish while keeping verification tracking in internal docs/data
+- What remains: final live QA checklist and presentation run-through
 
 Keep this honest. Professors appreciate genuine reflection more than a polished spin.
+
+---
+
+### Optional Demo Track (If There Is Time)
+
+Use this sequence to show the polish decisions quickly:
+
+1. Homepage: point out visual entry cues and reduced card text density
+2. One exhibit room: show concept diagram and readable section rhythm
+3. Artifacts page: show that production-note visual placeholders are gone
+4. Process page: explain that verification work is still tracked internally even though public badges were suppressed
 
 ---
 

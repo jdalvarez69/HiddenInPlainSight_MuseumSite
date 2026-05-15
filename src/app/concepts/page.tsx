@@ -4,6 +4,7 @@ import { concepts, exhibits } from "@/lib/museum-data";
 import ConceptCard from "@/components/ConceptCard";
 import CuratorNote from "@/components/CuratorNote";
 import NextRoomCTA from "@/components/NextRoomCTA";
+import ExhibitVisual from "@/components/visuals/ExhibitVisual";
 
 export const metadata: Metadata = {
   title: "Concept Guide — Hidden in Plain Sight",
@@ -16,6 +17,14 @@ const conceptsByRoom = exhibits.map((exhibit) => ({
   exhibit,
   items: concepts.filter((c) => c.exhibitSlug === exhibit.slug),
 }));
+
+const roomVisualMap = {
+  "secret-writing": "scytale",
+  "states-and-power": "frequency",
+  "machines-of-secrecy": "enigma",
+  "mathematical-turn": "public-private-key",
+  "invisible-shield": "tls",
+} as const;
 
 export default function ConceptsPage() {
   return (
@@ -39,10 +48,8 @@ export default function ConceptsPage() {
             className="text-lg leading-relaxed"
             style={{ color: "var(--color-text-secondary)", maxWidth: "60ch" }}
           >
-            Cryptography can seem technical. This guide explains the core ideas
-            behind each exhibit room in plain language — without assuming any
-            prior knowledge. Each concept is drawn directly from the history the
-            museum presents.
+            Cryptography can seem technical. This guide explains each room&apos;s
+            core ideas in plain language.
           </p>
         </div>
       </section>
@@ -56,11 +63,8 @@ export default function ConceptsPage() {
       {/* ── Curator Note ─────────────────────────────────────────────────── */}
       <section className="museum-container py-10 max-w-2xl">
         <CuratorNote>
-          This page works like the wall text in a museum gallery: you can read
-          it before you enter to set the stage, return to it mid-route if a term
-          is unfamiliar, or review it afterward to consolidate what you have
-          seen. The concepts are organized to match the order of the five
-          exhibit rooms.
+          Think of this as gallery wall text: read before, during, or after the
+          route. Concepts follow the same five-room order.
         </CuratorNote>
       </section>
 
@@ -76,34 +80,52 @@ export default function ConceptsPage() {
         .map((group) => (
           <section key={group.exhibit.slug} className="museum-container py-12">
             {/* Room label */}
-            <header className="mb-6">
-              <Link
-                href={`/exhibits/${group.exhibit.slug}`}
-                className="group inline-flex items-center gap-2"
-              >
+            <header className="mb-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_250px] lg:items-start">
+              <div>
+                <Link
+                  href={`/exhibits/${group.exhibit.slug}`}
+                  className="group inline-flex items-center gap-2"
+                >
+                  <p
+                    className="text-[0.6rem] tracking-widest uppercase transition-colors group-hover:text-[var(--color-accent)]"
+                    style={{ color: "var(--color-text-dim)" }}
+                  >
+                    Room {String(group.exhibit.order).padStart(2, "0")}
+                  </p>
+                  <span
+                    className="text-[0.6rem] transition-colors group-hover:text-[var(--color-accent)]"
+                    style={{ color: "var(--color-text-dim)" }}
+                    aria-hidden="true"
+                  >
+                    ↗
+                  </span>
+                </Link>
+                <h2
+                  className="mt-1 text-xl leading-snug"
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    color: "var(--color-text)",
+                  }}
+                >
+                  {group.exhibit.title}
+                </h2>
                 <p
-                  className="text-[0.6rem] tracking-widest uppercase transition-colors group-hover:text-[var(--color-accent)]"
-                  style={{ color: "var(--color-text-dim)" }}
+                  className="mt-2 text-sm"
+                  style={{ color: "var(--color-text-secondary)" }}
                 >
-                  Room {String(group.exhibit.order).padStart(2, "0")}
+                  Wall-guide concepts for this room.
                 </p>
-                <span
-                  className="text-[0.6rem] transition-colors group-hover:text-[var(--color-accent)]"
-                  style={{ color: "var(--color-text-dim)" }}
-                  aria-hidden="true"
-                >
-                  ↗
-                </span>
-              </Link>
-              <h2
-                className="mt-1 text-xl leading-snug"
-                style={{
-                  fontFamily: "var(--font-serif)",
-                  color: "var(--color-text)",
-                }}
-              >
-                {group.exhibit.title}
-              </h2>
+              </div>
+
+              <ExhibitVisual
+                visualKey={
+                  roomVisualMap[
+                    group.exhibit.slug as keyof typeof roomVisualMap
+                  ] ?? "scytale"
+                }
+                title="Room Diagram"
+                caption={group.exhibit.subtitle}
+              />
             </header>
 
             {/* Concept grid */}
@@ -147,9 +169,8 @@ export default function ConceptsPage() {
             className="mt-3 text-sm leading-relaxed"
             style={{ color: "var(--color-text-secondary)", maxWidth: "55ch" }}
           >
-            The guided route provides the historical evidence and argument that
-            gives each concept its full meaning. This guide is a companion, not
-            a substitute.
+            The guided route provides the evidence and argument. This page is a
+            companion, not a substitute.
           </p>
         </header>
 

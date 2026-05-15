@@ -5,7 +5,7 @@ A museum-style informational website about the history and evolution of cryptogr
 
 ---
 
-**Live Site:** *(to be added after deployment)*  
+**Live Site:** [https://jdalvarez69.github.io/HiddenInPlainSight_MuseumSite/](https://jdalvarez69.github.io/HiddenInPlainSight_MuseumSite/)  
 **GitHub Repository:** [jdalvarez69/HiddenInPlainSight_MuseumSite](https://github.com/jdalvarez69/HiddenInPlainSight_MuseumSite)
 
 ---
@@ -56,7 +56,7 @@ Five companion pages support the guided route without replacing it:
 
 The visual language draws from museum catalogs, serious institutional archives, and high-quality longform print journalism. The design earns its authority through structure and restraint, not decoration.
 
-- **Typography:** Lora (serif) for exhibit headings and museum identity; Geist Sans for navigation and UI labels. Body text kept between 60–75 characters per line.
+- **Typography:** A serif system stack (Georgia/Times) for exhibit headings and museum identity; a sans system stack (Arial/Helvetica/system-ui) for navigation and UI labels. Body text kept between 60–75 characters per line.
 - **Color:** Warm parchment text (`#f0ead8`) on a dark background (`#1a1714`), with amber accent (`#c4973a`) for labels, dots, and calls to action. Borders and rules use muted values that recede rather than compete.
 - **Texture:** A CSS-only dot-grid pattern adds a subtle archival quality without images.
 - **Mood:** A quiet, well-lit museum reading room. Not a hacker site. Not a tech startup landing page. Not a neon cyberpunk experience.
@@ -110,11 +110,22 @@ This project was not made from one giant prompt. Two AI tools were used as struc
 
 I chose the topic, defined the thesis, selected the design direction, decided what content was accurate enough to publish, reviewed every output before it was used, and rejected or revised anything that did not meet the project standard. Neither ChatGPT nor GitHub Copilot selected what to build, what to say, or what was worth keeping. Those decisions were mine.
 
+### Polish Sprint Update
+
+After the first deployed version, I judged the site as structurally strong but too text-heavy and not visually engaging enough. I then directed a focused polish sprint.
+
+Polish outcomes:
+- Custom local SVG visual system created (`src/components/visuals/`) and integrated into homepage, exhibit rooms, and companion pages
+- Public production-note text (`Visual: ...`) removed from artifact cards
+- Public verification badges suppressed for visitor-facing polish while `status` fields remain in `museum-data.ts` and verification work remains documented in project docs
+- Public-facing copy tightened to improve scanability and rhythm without changing the thesis or source discipline
+- No external image assets or hotlinked media used
+
 ---
 
 ## Research and Source Discipline
 
-All historical claims in the museum are traced to a source documented in `docs/RESEARCH_NOTES.md`. Items with insufficient sourcing carry a visible **Needs verification** label in the published content — they are not hidden or silently removed. No claim was fabricated or inferred without a supporting reference.
+All historical claims in the museum are traced to a source documented in `docs/RESEARCH_NOTES.md`. Verification status is retained in `src/lib/museum-data.ts` and project documentation. Public-facing verification badges were suppressed during polish to avoid unfinished presentation signals, but unresolved verification work remains tracked internally. No claim was fabricated or inferred without a supporting reference.
 
 The `[VERIFY]` convention was used throughout writing and content planning to prevent AI-assisted copy generation from introducing unsupported facts.
 
@@ -125,7 +136,8 @@ The `[VERIFY]` convention was used throughout writing and content planning to pr
 - [Next.js 16.2.6](https://nextjs.org/) — App Router, TypeScript, static generation
 - [Tailwind CSS](https://tailwindcss.com/) — utility-first styling with custom CSS properties
 - [TypeScript](https://www.typescriptlang.org/) — strict typing throughout
-- [Lora](https://fonts.google.com/specimen/Lora) + [Geist Sans](https://vercel.com/font) — serif and UI typefaces
+- System serif and sans font stacks — no external font fetch required at build time
+- Custom inline SVG exhibit visuals — local components only (`src/components/visuals/`), no external image dependencies
 - [ChatGPT](https://chat.openai.com/) — planning, research organization, writing support, prompt strategy, QA review, documentation support
 - [GitHub Copilot](https://github.com/features/copilot) (Agent mode) — file creation, code implementation, route creation, component creation, lint/build checks, Git workflow
 - ESLint — enforced at every build step
@@ -141,9 +153,9 @@ The `[VERIFY]` convention was used throughout writing and content planning to pr
 | Production build | ✓ Passing |
 | TypeScript | ✓ Clean |
 | README | ✓ Complete |
-| Deployment | Pending — link to be added |
-| Final visual polish review | Pending |
-| Responsive layout browser test | Pending |
+| Visual polish sprint | ✓ Complete |
+| GitHub Pages deployment | ✓ Live at project URL |
+| Final live QA pass (responsive + browser console) | Pending |
 | Presentation preparation | Pending |
 
 ---
