@@ -72,15 +72,17 @@ The site speaks with the authority of someone who genuinely knows the subject an
 
 ---
 
-## Cialdini Principle: Curiosity Gap
+## Cialdini Principle: Authority
 
-The site is organized around curiosity gaps — the feeling that a question has been partially answered and the full answer is just ahead.
+The primary Cialdini principle applied throughout this site is **Authority**. The site builds credibility through research-based writing, sourced historical examples, museum-style organization, restrained visual design, and a serious educational tone. The visitor is not being entertained — they are being informed by a source that has done the work.
 
-This is applied through:
-- **Exhibit transitions:** Each room ends by naming the problem it leaves unsolved and pointing forward to the next room
-- **Curator notes:** Interpretive asides that reframe what the visitor just saw
-- **Artifact captions:** Objects are presented with enough context to make the visitor want to know what came next
-- **The guided route itself:** The five-room structure creates forward momentum that makes each room feel incomplete without the next
+Authority is expressed through:
+- **Research-backed content:** Every historical claim is traced to a documented source in `docs/RESEARCH_NOTES.md`
+- **Museum-style structure:** The guided route, exhibit labels, curator notes, and artifact panels follow institutional conventions that signal scholarly seriousness
+- **Restrained visual design:** Editorial archival modernism communicates that the content, not the interface, is what matters
+- **Consistent editorial voice:** The writing does not oversimplify or sensationalize — it explains clearly and trusts the visitor
+
+Curiosity gaps function as a supporting engagement structure, not the primary principle. Each exhibit ends by naming a problem it leaves open, and the next room answers it — creating forward momentum through the guided route.
 
 ---
 
@@ -126,7 +128,7 @@ Polish outcomes:
 
 ## Research and Source Discipline
 
-All historical claims in the museum are traced to a source documented in `docs/RESEARCH_NOTES.md`. Verification status is retained in `src/lib/museum-data.ts` and project documentation. Public-facing verification badges were suppressed during polish to avoid unfinished presentation signals, but unresolved verification work remains tracked internally. No claim was fabricated or inferred without a supporting reference.
+All historical claims in the museum are traced to a source documented in `docs/RESEARCH_NOTES.md`. Verification status is retained in `src/lib/museum-data.ts` and project documentation. Research notes and internal documentation were used to keep the project grounded in sourced historical material. No claim was fabricated or inferred without a supporting reference.
 
 The `[VERIFY]` convention was used throughout writing and content planning to prevent AI-assisted copy generation from introducing unsupported facts.
 
@@ -156,8 +158,6 @@ The `[VERIFY]` convention was used throughout writing and content planning to pr
 | README | ✓ Complete |
 | Visual polish sprint | ✓ Complete |
 | GitHub Pages deployment | ✓ Live at project URL |
-| Final live QA pass (responsive + browser console) | Pending |
-| Presentation preparation | Pending |
 
 ---
 
@@ -194,7 +194,6 @@ All planning documents are in `/docs/`:
 | `SITE_COPY.md` | Source-of-truth writing document for all museum content |
 | `AI_ORCHESTRATION_LOG.md` | Logged record of every significant AI interaction |
 | `QA_REVIEW_LOG.md` | Staged acceptance criteria and review checklists |
-| `PRESENTATION_NOTES.md` | Presentation outline and talking points |
 
 ---
 
