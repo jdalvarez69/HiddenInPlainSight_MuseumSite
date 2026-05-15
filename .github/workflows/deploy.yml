@@ -39,7 +39,8 @@ jobs:
           GITHUB_PAGES: "true"
 
       - name: Verify export output
-        run: test -d ./out || (echo "Error: ./out directory not found after build." && exit 1)
+        run: |
+          test -d ./out || (echo "Error: ./out directory not found after build." && exit 1)
 
       - name: Add .nojekyll
         run: touch ./out/.nojekyll
